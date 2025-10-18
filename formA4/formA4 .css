@@ -1,0 +1,111 @@
+@font-face {
+    font-family: calibri;
+    src: url(/fonts/calibrib.ttf);
+}
+
+* { 
+    margin: 0;
+    direction: rtl;
+}
+body {
+    margin: 0 auto;
+    font-family: sans-serif;
+    background-color: #e65353;
+    max-width: 1600px;
+}
+
+/* Navbar */
+body > header {
+    background-color: #333;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+/* Main */
+body > main {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+/* فرم A4 */
+.form-a4 {
+    transform: scale(.4);
+    transform-origin: top center;
+    background: white;
+    width: 21cm;
+    height: 29.7cm;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    flex: 0.5in 1 0.5in;
+    justify-content: space-between;
+}
+.form-a4 #header{
+    width: 21cm;
+    height: 0.5in;
+    position: relative;
+}
+.form-a4 #header img{
+    width: 21cm;
+}
+.form-a4 #header p{
+    width: 21cm;
+    position: absolute;
+    right: 20px;
+    top: 30px;
+    color: white;
+    font-family: calibri;
+    font-size: 16px;
+    line-height: 35px;
+}
+
+.form-a4 #main , #main *{
+    margin: 0 auto;
+    border: 2px solid black;
+    text-align: center;
+}
+
+
+
+.form-a4 #footer img{
+    width: 21cm;
+}
+
+/* Footer */
+body > footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+}
+
+/* فقط فرم در حالت چاپ نمایش داده شود */
+@media print {
+
+    @page {
+        size: A4;
+        margin: 0; /* حذف حاشیه چاپگر (اگه مرورگر اجازه بده) */
+    }
+    .form-a4 {
+        transform: scale(1);
+        transform-origin: top center; /* وسط‌چین شدن */
+        margin: auto; /* وسط شدن افقی */
+        position: static; /* جلوگیری از چسبیدن به گوشه */
+        page-break-inside: avoid; /* جلوگیری از شکسته شدن فرم */
+    }
+    .form-a4 {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+    /* body * {
+        visibility: hidden;
+    }
+    .form-a4, .form-a4 * {
+        visibility: visible;
+    } */
+}

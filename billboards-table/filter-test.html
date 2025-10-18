@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>تست فیلتر مالکیت - جدول تابلوها</title>
+	<link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" 
+    integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer"/>
+	<link rel="stylesheet" href="../shared/main.css"/>
+	<link rel="stylesheet" href="../shared/style.css"/>
+	<link rel="stylesheet" href="table-style.css"/>
+	<style>
+		.test-container {
+			max-width: 1200px;
+			margin: 0 auto;
+			padding: 20px;
+		}
+		.test-header {
+			background: linear-gradient(135deg, #3182ce, #2c5282);
+			color: white;
+			padding: 30px;
+			border-radius: 15px;
+			text-align: center;
+			margin-bottom: 30px;
+		}
+		.test-section {
+			background: #fff;
+			border-radius: 12px;
+			padding: 25px;
+			margin-bottom: 25px;
+			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+		}
+		.test-title {
+			color: #2d3748;
+			margin-bottom: 20px;
+			font-size: 24px;
+			border-bottom: 3px solid #3182ce;
+			padding-bottom: 10px;
+		}
+		.btn-group {
+			display: flex;
+			gap: 15px;
+			flex-wrap: wrap;
+			justify-content: center;
+			margin: 20px 0;
+		}
+		.btn {
+			padding: 12px 25px;
+			border: none;
+			border-radius: 8px;
+			background: linear-gradient(135deg, #3182ce, #2c5282);
+			color: white;
+			font-size: 16px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			text-decoration: none;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			gap: 8px;
+		}
+		.btn:hover {
+			background: linear-gradient(135deg, #2c5282, #2a4a6b);
+			transform: translateY(-2px);
+			box-shadow: 0 6px 20px rgba(49, 130, 206, 0.4);
+		}
+		.btn.success { background: linear-gradient(135deg, #38a169, #2f855a); }
+		.btn.warning { background: linear-gradient(135deg, #d69e2e, #b7791f); }
+		.btn.danger { background: linear-gradient(135deg, #e53e3e, #c53030); }
+		.info-box {
+			background: #e6fffa;
+			border: 1px solid #81e6d9;
+			border-radius: 8px;
+			padding: 20px;
+			margin: 20px 0;
+			color: #234e52;
+		}
+		.info-box h4 {
+			color: #2d3748;
+			margin-top: 0;
+		}
+		.stats-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+			gap: 20px;
+			margin: 20px 0;
+		}
+		.stat-card {
+			background: #f7fafc;
+			border: 1px solid #e2e8f0;
+			border-radius: 8px;
+			padding: 20px;
+			text-align: center;
+		}
+		.stat-number {
+			font-size: 32px;
+			font-weight: bold;
+			color: #3182ce;
+			margin-bottom: 10px;
+		}
+		.stat-label {
+			color: #4a5568;
+			font-size: 14px;
+		}
+	</style>
+</head>
+<body>
+	<div class="test-container">
+		<div class="test-header">
+			<h1>تست فیلتر مالکیت - جدول تابلوها</h1>
+			<p>این صفحه برای تست فیلتر مالکیت در جدول کل تابلوها طراحی شده است</p>
+		</div>
+
+		<div class="test-section">
+			<h2 class="test-title">مدیریت داده‌های تست</h2>
+			<div class="btn-group">
+				<button class="btn success" onclick="createTestData()">
+					<i class="fa-solid fa-database"></i>
+					ایجاد داده‌های تست
+				</button>
+				<button class="btn warning" onclick="createTestPartners()">
+					<i class="fa-solid fa-handshake"></i>
+					ایجاد شرکت‌های همکار
+				</button>
+				<button class="btn" onclick="refreshData()">
+					<i class="fa-solid fa-refresh"></i>
+					بروزرسانی داده‌ها
+				</button>
+				<button class="btn danger" onclick="clearAllData()">
+					<i class="fa-solid fa-trash"></i>
+					پاک کردن همه داده‌ها
+				</button>
+			</div>
+		</div>
+
+		<div class="test-section">
+			<h2 class="test-title">آمار سیستم</h2>
+			<div class="stats-grid" id="statsGrid">
+				<div class="stat-card">
+					<div class="stat-number" id="totalBillboards">0</div>
+					<div class="stat-label">کل تابلوها</div>
+				</div>
+				<div class="stat-card">
+					<div class="stat-number" id="totalPartners">0</div>
+					<div class="stat-label">شرکت‌های همکار</div>
+				</div>
+				<div class="stat-card">
+					<div class="stat-number" id="activeBillboards">0</div>
+					<div class="stat-label">تابلوهای فعال</div>
+				</div>
+				<div class="stat-card">
+					<div class="stat-number" id="inactiveBillboards">0</div>
+					<div class="stat-label">تابلوهای غیرفعال</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="test-section">
+			<h2 class="test-title">تست فیلتر</h2>
+			<div class="btn-group">
+				<button class="btn" onclick="testOwnershipFilter()">
+					<i class="fa-solid fa-building"></i>
+					تست فیلتر مالکیت
+				</button>
+				<button class="btn success" onclick="goToTable()">
+					<i class="fa-solid fa-external-link-alt"></i>
+					برو به جدول تابلوها
+				</button>
+			</div>
+		</div>
+
+		<div class="info-box">
+			<h4>راهنمای استفاده:</h4>
+			<ol>
+				<li>ابتدا دکمه "ایجاد داده‌های تست" را کلیک کنید</li>
+				<li>سپس دکمه "ایجاد شرکت‌های همکار" را کلیک کنید</li>
+				<li>دکمه "بروزرسانی داده‌ها" را کلیک کنید تا آمار به‌روزرسانی شود</li>
+				<li>دکمه "برو به جدول تابلوها" را کلیک کنید تا فیلتر مالکیت را تست کنید</li>
+			</ol>
+		</div>
+	</div>
+
+	<script src="table-script.js"></script>
+	<script>
+		function log(message) {
+			console.log(message);
+		}
+
+		function createTestData() {
+			const testBillboards = [
+				{ id: 101, billboardCode: "BB-THR-001", province: "تهران", city: "تهران", region: "منطقه 1", position: "میدان ولیعصر", viewAngle: "رو به شمال", structureType: "دیجیتال", length: 6, width: 3, squareMeter: 18, ownership: "شرکت آفتاب", isInactive: false, isEmpty: false, isCultural: false, isBroadcasting: true, isReserved: true, broadcastStartDate: "2024-01-01", broadcastEndDate: "2024-01-31", broadcastDuration: 30, broadcastBy: "شرکت الف", extension: false, nextReservedBy: "", description: "بیلبورد بزرگ دیجیتال" },
+				{ id: 102, billboardCode: "BB-THR-002", province: "تهران", city: "تهران", region: "منطقه 3", position: "خیابان شریعتی", viewAngle: "رو به جنوب", structureType: "پایه‌ای", length: 4, width: 2, squareMeter: 8, ownership: "شرکت ماه", isInactive: false, isEmpty: true, isCultural: false, isBroadcasting: false, isReserved: false, broadcastStartDate: "", broadcastEndDate: "", broadcastDuration: 0, broadcastBy: "", extension: false, nextReservedBy: "", description: "بیلبورد دوطرفه" },
+				{ id: 103, billboardCode: "BB-ISF-001", province: "اصفهان", city: "اصفهان", region: "مرکز شهر", position: "میدان نقش جهان", viewAngle: "رو به شرق", structureType: "سنتی", length: 5, width: 2.5, squareMeter: 12.5, ownership: "شرکت ستاره", isInactive: false, isEmpty: false, isCultural: true, isBroadcasting: false, isReserved: true, broadcastStartDate: "2024-03-01", broadcastEndDate: "2024-03-15", broadcastDuration: 15, broadcastBy: "", extension: false, nextReservedBy: "سازمان فرهنگی", description: "بیلبورد طرح فرهنگی" },
+				{ id: 104, billboardCode: "BB-SHZ-001", province: "فارس", city: "شیراز", region: "منطقه 2", position: "بلوار چمران", viewAngle: "رو به غرب", structureType: "دیجیتال", length: 7, width: 3.5, squareMeter: 24.5, ownership: "شرکت آفتاب", isInactive: true, isEmpty: true, isCultural: false, isBroadcasting: false, isReserved: false, broadcastStartDate: "", broadcastEndDate: "", broadcastDuration: 0, broadcastBy: "", extension: false, nextReservedBy: "", description: "بیلبورد بزرگراه" },
+				{ id: 105, billboardCode: "BB-MHD-001", province: "خراسان رضوی", city: "مشهد", region: "منطقه 1", position: "بلوار وکیل‌آباد", viewAngle: "رو به جنوب", structureType: "دیجیتال", length: 8, width: 4, squareMeter: 32, ownership: "شرکت ماه", isInactive: false, isEmpty: false, isCultural: false, isBroadcasting: true, isReserved: false, broadcastStartDate: "2024-02-01", broadcastEndDate: "2024-02-28", broadcastDuration: 28, broadcastBy: "شرکت ب", extension: false, nextReservedBy: "", description: "بیلبورد بزرگراه مشهد" }
+			];
+			
+			localStorage.setItem('billboardsData', JSON.stringify(testBillboards));
+			log('داده‌های تست بیلبوردها ایجاد شدند');
+			refreshData();
+		}
+
+		function createTestPartners() {
+			const testPartners = [
+				{ id: 1, name: "شرکت آفتاب", phones: ["02112345678", "09121234567"] },
+				{ id: 2, name: "شرکت ماه", phones: ["02187654321", "09129876543"] },
+				{ id: 3, name: "شرکت ستاره", phones: ["02111223344", "09121122334"] },
+				{ id: 4, name: "شرکت خورشید", phones: ["02155667788", "09125566778"] },
+				{ id: 5, name: "شرکت آسمان", phones: ["02199887766", "09129988776"] }
+			];
+			
+			localStorage.setItem('partners', JSON.stringify(testPartners));
+			log('شرکت‌های همکار تست ایجاد شدند');
+			refreshData();
+		}
+
+		function refreshData() {
+			try {
+				const billboards = JSON.parse(localStorage.getItem('billboardsData') || '[]');
+				const partners = JSON.parse(localStorage.getItem('partners') || '[]');
+				
+				document.getElementById('totalBillboards').textContent = billboards.length;
+				document.getElementById('totalPartners').textContent = partners.length;
+				
+				const activeCount = billboards.filter(b => !b.isInactive).length;
+				const inactiveCount = billboards.filter(b => b.isInactive).length;
+				
+				document.getElementById('activeBillboards').textContent = activeCount;
+				document.getElementById('inactiveBillboards').textContent = inactiveCount;
+				
+				log(`داده‌ها بروزرسانی شد: ${billboards.length} تابلو، ${partners.length} شرکت`);
+			} catch (error) {
+				log('خطا در بروزرسانی داده‌ها: ' + error.message);
+			}
+		}
+
+		function clearAllData() {
+			if (confirm('آیا مطمئن هستید که می‌خواهید همه داده‌ها را پاک کنید؟')) {
+				localStorage.removeItem('billboardsData');
+				localStorage.removeItem('partners');
+				refreshData();
+				log('همه داده‌ها پاک شدند');
+			}
+		}
+
+		function testOwnershipFilter() {
+			log('تست فیلتر مالکیت: انتخاب "شرکت آفتاب"');
+			// This would be tested on the table page
+		}
+
+		function goToTable() {
+			window.location.href = 'billboards-table.html';
+		}
+
+		// Initialize on page load
+		document.addEventListener('DOMContentLoaded', () => {
+			refreshData();
+			log('صفحه تست بارگذاری شد');
+		});
+	</script>
+</body>
+</html>

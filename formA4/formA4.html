@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>پیش‌نمایش A4</title>
+<link rel="stylesheet" href="formA4 .css"/>
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  html,body{height:100%}
+  body{margin:0; direction: rtl; font-family: calibri, tahoma, sans-serif; background:#f1f5f9;}
+  /* Screen preview canvas exactly A4 */
+  .page{ width: 210mm; height: 297mm; margin: 12px auto; background:#fff; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,.18); overflow: hidden; }
+  .print-header{position: absolute; top:0; left:0; right:0; height: 40mm;}
+  .print-footer{position: absolute; bottom:0; left:0; right:0; height: 30mm;}
+  .print-header img, .print-footer img{width:100%; height:100%; object-fit: cover; display:block;}
+  .content{position: absolute; top: 42mm; bottom: 32mm; left: 12mm; right: 12mm; overflow: hidden;}
+  /* Content typography and tables */
+  .content h1,.content h2,.content h3{ margin: 8px 0; color:#0f1838; }
+  .content .cart-table{ width:100%; border-collapse: collapse; margin-top:12px; }
+  .content .cart-table th,.content .cart-table td{ border:1px solid #cbd5e0; padding:6px; text-align:center; font-size:12px; }
+  .content .cart-table thead th{ background:#f7fafc; }
+  .table-sep{ border:0; border-top:3px solid #0f1838; margin:12px 0; }
+  /* Top-left document meta */
+  .doc-meta{ position:absolute; top: 6mm; left: 12mm; display:flex; gap:8px; font-size:12px; color:#0f1838; z-index: 5; }
+  /* .doc-meta span{ background:#eef2f7; border:1px solid #cbd5e0; padding:2px 6px; border-radius:6px; } */
+  
+  .toolbar{position: fixed; top: 6mm; left: 12mm; z-index: 10;}
+  .btn{ padding: 8px 12px; border: 1px solid #cbd5e0; background: #fff; border-radius: 8px; cursor: pointer; }
+  @media print{
+    body{ background:#fff; }
+    .toolbar{ display: none; }
+    .page{ width:auto; height:auto; margin:0; box-shadow:none; }
+    .print-header{ position: fixed; top:0; height: 40mm; }
+    .print-footer{ position: fixed; bottom:0; height: 30mm; }
+    .content{ position: relative; padding: 0 12mm; margin-top: 42mm; margin-bottom: 32mm; top:auto; bottom:auto; left:auto; right:auto; overflow: visible; }
+  }
+</style>
+</head>
+<body>
+  <div class="toolbar"><button id="btnPrint" class="btn">چاپ</button></div>
+  <div class="page">
+    <div class="doc-meta" id="docMeta"></div>
+    <div class="print-header"><img src="Picture1.png" alt="header"/></div>
+    <div class="print-footer"><img src="Picture2.png" alt="footer"/></div>
+    <div class="content" id="content">
+      <div id="docBody"></div>
+      <div id="docTable"></div>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      try{
+        const payload = JSON.parse(localStorage.getItem('printPayload')||'{}');
+        const docMeta = document.getElementById('docMeta');
+        const docBody = document.getElementById('docBody');
+        const docTable = document.getElementById('docTable');
+        // Single meta (top-left): number and date only
+        const now = payload.createdAtFa || new Date().toLocaleDateString('fa-IR');
+        // Meta removed by request
+        // Keep original prepared HTML if provided, but remove any tables inside it
+        if (payload && payload.html){
+          const temp = document.createElement('div');
+          temp.innerHTML = payload.html;
+          // remove first table found to avoid duplicate tables
+          const tbl = temp.querySelector('table');
+          if (tbl) tbl.remove();
+          docBody.innerHTML = temp.innerHTML;
+        }
+        // Table of selected items from cart
+        const cart = JSON.parse(localStorage.getItem('cartItems')||'{}');
+        const items = Array.isArray(cart.items)?cart.items:[];
+        let rows = '';
+        items.forEach((it, idx)=>{
+          const unit = Number(it.priceNumber||0);
+          const disc = Math.min(100, Math.max(0, Number(it.discountPercent)||0));
+          const code = String(it.id||it.billboardCode||'—');
+          const title = it.title || '—';
+          rows += `<tr><td>${idx+1}</td><td>${title}</td><td>${code}</td><td>${new Intl.NumberFormat('fa-IR').format(unit)}</td><td>${disc?disc+'%':'—'}</td><td>${it.startDate||'—'}</td><td>${it.endDate||'—'}</td></tr>`;
+        });
+        docTable.innerHTML = `
+          <hr class="table-sep">
+          <table class="cart-table">
+            <thead><tr><th>ردیف</th><th>عنوان</th><th>کد تابلو</th><th>قیمت واحد</th><th>تخفیف</th><th>تاریخ شروع</th><th>تاریخ پایان</th></tr></thead>
+            <tbody>${rows||'<tr><td colspan="7">—</td></tr>'}</tbody>
+          </table>
+        `;
+      }catch{}
+      document.getElementById('btnPrint').addEventListener('click', ()=>{ window.print(); });
+    })();
+  </script>
+</body>
+</html>

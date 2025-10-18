@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>بیلبوردهای شهر پردیس</title>
+  <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" 
+    integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <!-- <link
+      rel="stylesheet"
+      href="https://cdnjs.cl  oudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"/> -->
+  <link rel="stylesheet" href="../shared/style.css"/>
+  <link rel="stylesheet" href="../shared/main.css"/>
+  <style>
+    .filter-section{ margin-top: 150px; }
+  </style>
+</head>
+
+<body data-city="پردیس">
+  <header>
+    <nav class="navbar">
+      <!-- Right section -->
+      <div class="nav-right">
+        <!-- <a style="padding: 0;" href="home.html"><img src="../images/icons/Group 57.png" alt="لوگو" class="logo"/></a> -->
+        <a href="../billboards-table/billboards-table.html"><b> جدول کل تابلوها </b></a>
+        <div class="dropdown">
+            <button class="dropdown-btn"><b>لیست شهرها</b></button>
+            <div class="dropdown-content" id="desktopCityDropdown">
+                <!-- Cities will be populated dynamically -->
+            </div>
+        </div>
+        <!-- <a href="reserved.html"><b>بیلبورد های رزرو شده</b></a> -->
+      </div>
+
+      <!-- اینجا منوی همبرگری -->
+      <div class="hamburger" id="hamburger">
+        <i style="font-size: 1.6em;" class="fa-solid fa-bars"></i>
+        <!-- <img style="width: 1.5em;" src="../images/icon/menu-bar.png" alt=""> -->
+      </div>
+      <!-- پنل منو موبایل -->
+      <div class="mobile-panel" id="mobilePanel">
+          <!-- سکشن کاربری موبایل -->
+          <div class="mobile-user-section">
+            <div class="mobile-user-profile" id="mobileUserProfile">
+              <div class="mobile-user-avatar">
+                <i class="fa-solid fa-user"></i>
+              </div>
+              <div class="mobile-user-info">
+                <span class="mobile-user-name">آرین مقدری</span>
+                <span class="mobile-user-role">مدیر</span>
+              </div>
+              <div class="mobile-user-dropdown-arrow">
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+          </div>
+            <div class="mobile-user-dropdown" id="mobileUserDropdown">
+              <a href="user-profile/profile.html"><i class="fa-solid fa-user"></i> پروفایل</a>
+              <a href="admin-panel/admin-panel.html"><i class="fa-solid fa-cog"></i> پنل مدیریت</a>
+              <a href="#" onclick="logout()"><i class="fa-solid fa-sign-out-alt"></i> خروج</a>
+            </div>
+          </div>
+          
+          <div class="mobile-links">
+            <a href="../billboards-table/billboards-table.html">جدول کل تابلوها</a>
+            <div class="dropdown">
+              <button class="dropdown-btn"><b>لیست شهرها</b></button>
+              <div class="dropdown-content" id="mobileCityDropdown">
+                  <!-- Cities will be populated dynamically -->
+              </div>
+            </div>
+            <!-- <a href="reserved.html">بیلبورد های رزرو شده</a> -->
+          </div>
+      </div>
+
+      <!-- لوگو در وسط ناوبری موبایل -->
+      <div class="mobile-logo">
+        <i class="fa-solid fa-billboard"></i>
+        <span>بیلبورد</span>
+      </div>
+
+      <!-- Left section -->
+      <div class="nav-left">
+          <a href="#" class="cart">
+              🛒
+              <span class="cart-count">0</span>
+          </a>
+          <div class="user-profile" id="desktopUserProfile">
+              <div class="user-avatar">
+                  <i class="fa-solid fa-user"></i>
+              </div>
+              <div class="user-info">
+                  <span class="user-name">آرین مقدری</span>
+                  <span class="user-role">مدیر</span>
+              </div>
+              <div class="user-dropdown-arrow">
+                  <i class="fa-solid fa-chevron-down"></i>
+              </div>
+              <div class="user-dropdown">
+              <a href="../user-profile/profile.html"><i class="fa-solid fa-user"></i> پروفایل</a>
+              <a href="../admin-panel/admin-panel.html"><i class="fa-solid fa-cog"></i> پنل مدیریت</a>
+                  <a href="../user-profile/profile.html"><i class="fa-solid fa-user"></i> پروفایل</a>
+                  <a href="../admin-panel/admin-panel.html"><i class="fa-solid fa-cog"></i> پنل مدیریت</a>
+                  <a href="#" onclick="logout()"><i class="fa-solid fa-sign-out-alt"></i> خروج</a>
+              </div>
+          </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <!-- Filter Section -->
+    <section class="filter-section">
+      <div class="container">
+        <div class="filter-container">
+          <!-- Search Box -->
+          <div class="filter-group search-group">
+            <label for="searchInput">جستجو در محصولات:</label>
+            <div class="search-box">
+              <input type="text" id="searchInput" placeholder="جستجو بر اساس نام، شهر، منطقه...">
+              <i class="fa-solid fa-search"></i>
+            </div>
+          </div>
+          
+          <!-- Label Filter Dropdown -->
+          <div class="filter-group dropdown-group">
+            <label for="labelDropdown">فیلتر بر اساس لیبل:</label>
+            <div class="custom-dropdown">
+              <button class="dropdown-toggle" id="labelDropdownToggle">
+                <span class="dropdown-text">انتخاب لیبل</span>
+                <i class="fa-solid fa-chevron-down"></i>
+              </button>
+              <div class="dropdown-menu" id="labelDropdownMenu">
+                <label class="dropdown-item">
+                  <input type="checkbox" id="filterReserved" value="reserved">
+                  <span class="checkmark"></span>
+                  رزرو شده
+                </label>
+                <label class="dropdown-item">
+                  <input type="checkbox" id="filterAvailable" value="available">
+                  <span class="checkmark"></span>
+                  موجود
+                </label>
+                <label class="dropdown-item">
+                  <input type="checkbox" id="filterInactive" value="inactive">
+                  <span class="checkmark"></span>
+                  غیرفعال
+                </label>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Ownership Filter Dropdown -->
+          <div class="filter-group dropdown-group">
+            <label for="ownershipDropdown">فیلتر بر اساس مالکیت:</label>
+            <div class="custom-dropdown">
+              <button class="dropdown-toggle" id="ownershipDropdownToggle">
+                <span class="dropdown-text">انتخاب مالکیت</span>
+                <i class="fa-solid fa-chevron-down"></i>
+              </button>
+              <div class="dropdown-menu" id="ownershipDropdownMenu">
+                <!-- Ownership options will be populated dynamically -->
+              </div>
+            </div>
+          </div>
+          
+          <!-- Filter Actions -->
+          <div class="filter-actions">
+            <button class="btn-filter" onclick="applyFilters()">
+              <i class="fa-solid fa-filter"></i>
+              اعمال فیلتر
+            </button>
+            <button class="btn-clear" onclick="clearFilters()">
+              <i class="fa-solid fa-times"></i>
+              پاک کردن فیلترها
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- City Summary -->
+    <section class="city-summary">
+      <div class="meta">
+        <h2>بیلبوردهای شهر پردیس</h2>
+        <span>تعداد بیلبوردها: <strong id="billboardCount">0</strong></span>
+      </div>
+    </section>
+
+    <!-- Products Grid (match navbar structure: row directly) -->
+    <section class="product-sec-new">
+        <div class="row" id="productsContainer">
+          <!-- Product cards will be dynamically loaded here -->
+      </div>
+    </section>  
+    
+    <!-- Product Popup -->
+    <div id="product-popup" class="popup">
+      <div class="popup-content">
+        <span class="close-btn">&times;</span>
+        <div id="popup-info"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Cart Panel -->
+  <div class="cart-backdrop" id="cartBackdrop"></div>
+  <aside class="cart-panel" id="cartPanel" aria-hidden="true">
+    <div class="cart-header">
+      <span>سبد خرید</span>
+      <button class="cart-close" id="cartClose" aria-label="بستن">×</button>
+    </div>
+    <div class="cart-body">
+      <table class="cart-table">
+        <thead>
+          <tr>
+            <th>تصویر</th>
+            <th>عنوان</th>
+            <th>قیمت واحد</th>
+            <th>تخفیف (%)</th>
+            <th>تعداد</th>
+            <th>مجموع</th>
+            <th>حذف</th>
+          </tr>
+        </thead>
+        <tbody id="cartTableBody"></tbody>
+      </table>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">مجموع: <span id="cartTotal">0</span></div>
+      <button class="cart-checkout-btn" id="cartCheckout">ثبت سفارش</button>
+    </div>
+  </aside>
+
+  <footer>
+    <div class="row">
+      <div style="order: 0" id="footer-logo">
+        <img style="width: 50px;" src="../images/icons/logo.png" alt="">
+        <span style="margin-top: 30px; font-size: 1em;"><p>توضیحات:<br>
+        <pre>بزرگترین و معتبرترین شرکت رزرو بیلبورد تبلیغاتی در ایران
+سایت دیتابیس تابلوهای تبلیغاتی هلدینگ آراد</pre></span>
+      </div>
+      <div style="order: 1" class="col-lg-4">
+        <div class="left">
+          <div id="social-media" class="title">ما را در شبکه های اجتماعی دنبال کنید</div>
+          <div class="socials">
+            <a href=""><i class="fab fa-twitter"></i></a>
+            <a href=""><i class="fab fa-instagram"></i></a>
+            <a href=""><i class="fab fa-linkedin"></i></a>
+            <a href=""><i class="fab fa-telegram-plane"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom">کلیه حقوق برای شرکت آراد محفوظ می باشد 2025/1404 ©</div>
+  </footer>
+  <script src="../shared/javas.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof loadCitiesToNavbar === 'function') loadCitiesToNavbar();
+      if (typeof applyStoredUserToNavbar === 'function') applyStoredUserToNavbar();
+      if (typeof updateNavigationButton === 'function') updateNavigationButton();
+      initializeCartPanel();
+      loadAndRenderPardisProducts();
+    });
+
+    function loadAndRenderPardisProducts(){
+      const container = document.getElementById('productsContainer');
+      const countEl = document.getElementById('billboardCount');
+      if (!container || !countEl) return;
+      const billboards = JSON.parse(localStorage.getItem('billboardsData')||'[]');
+      const list = billboards.filter(b=>{
+        const c = String(b.city||'').toLowerCase();
+        return c.includes('پردیس') || c.includes('pardis');
+      });
+      countEl.textContent = list.length;
+      container.innerHTML = '';
+      if (!list.length){
+        container.innerHTML = '<div class="col-12" style="text-align:center;padding:40px;color:#718096;">هیچ تابلو تبلیغاتی برای شهر پردیس یافت نشد</div>';
+        return;
+      }
+      list.forEach(b=>container.appendChild(createProductCard(b)));
+    }
+
+    function createProductCard(billboard){
+      const col = document.createElement('div');
+      col.className = 'col-lg-3 col-md-4 col-sm-6 col-xs-12';
+      const pc = billboard.productCard||{};
+      const image = pc.imageDataUrl || '../images/products/h1.jpg';
+      const title = pc.title || billboard.position || billboard.billboardCode || 'بیلبورد';
+      const price = pc.priceNumber || 0;
+      const priceText = price ? (Number(price).toLocaleString('fa-IR')+' تومان') : 'قیمت نامشخص';
+      const isReserved = billboard.isReserved || (billboard.labels||[]).includes('reserved');
+      const isAvailable = billboard.isEmpty || (billboard.labels||[]).includes('available');
+      const isInactive = billboard.isInactive || (billboard.labels||[]).includes('inactive');
+      col.innerHTML = `
+        <div class="shoping-card" 
+          data-id="${billboard.id||''}" 
+          data-code="${billboard.billboardCode||''}" 
+          data-ownership="${billboard.ownership||''}" 
+          data-length="${billboard.length||''}" 
+          data-width="${billboard.width||''}" 
+          data-square="${billboard.squareMeter||''}" 
+          data-city="${billboard.city||''}" 
+          data-province="${billboard.province||''}" 
+          data-address="${billboard.address||''}" 
+          data-description="${billboard.description||''}">
+          <div class="img-sec">
+            <img src="${image}" alt="${title}" />
+            ${isReserved ? '<span class="hot-offer">رزرو شده</span>' : ''}
+            ${isInactive ? '<span class="inactive-offer">غیرفعال</span>' : ''}
+            ${isAvailable ? '<span class="available-offer">موجود</span>' : ''}
+          </div>
+          <div class="title">${title}</div>
+          <div class="buttons">
+            <div class="right"><span class="price">${priceText}</span></div>
+            <div class="left">
+              <div class="extend-btn" onclick="event.stopPropagation(); addToCart('${billboard.id || billboard.billboardCode}')">
+                <a class="b-text" href="#">خرید</a>
+                <a class="b-icon" href="#"><i class="fas fa-shopping-cart"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>`;
+      col.addEventListener('click', function(e){ if (e.target.closest('.extend-btn')) return; showProductPopup(billboard); });
+      return col;
+    }
+
+    function showProductPopup(b){
+      const pc=b.productCard||{};
+      const image=pc.imageDataUrl||'../images/products/h1.jpg';
+      const title=pc.title||b.position||b.billboardCode||'بیلبورد';
+      const price=pc.priceNumber||0;
+      const priceText=price?`${price.toLocaleString('fa-IR')} تومان`:'قیمت نامشخص';
+      const popup=document.getElementById('product-popup');
+      const info=document.getElementById('popup-info');
+      if(!popup||!info) return;
+      info.innerHTML=`
+        <img src="${image}" alt="${title}" style="max-width:100%;border-radius:8px;margin-bottom:15px;">
+        <h2 style="color:#2d3748;margin-bottom:10px;">${title}</h2>
+        <p style="font-size:18px;font-weight:bold;color:#e53e3e;margin-bottom:15px;">${priceText}</p>`;
+      popup.style.display='block';
+    }
+
+    function addToCart(id){
+      try{
+        const billboards=JSON.parse(localStorage.getItem('billboardsData')||'[]');
+        const b=billboards.find(x=>String(x.id)===String(id)||String(x.billboardCode)===String(id));
+        if(!b) return;
+        const pc=b.productCard||{};
+        const item={ id: String(b.id||b.billboardCode||pc.title||Date.now()), title: pc.title||b.position||'بیلبورد', priceNumber: pc.priceNumber||0, image: pc.imageDataUrl||'../images/products/h1.jpg', qty:1, discountPercent:0 };
+        const raw=localStorage.getItem('cartItems');
+        let items=[]; try{ items=JSON.parse(raw||'{}').items||[] }catch{}
+        const ex=items.find(i=>String(i.id)===String(item.id));
+        if(ex){ ex.qty+=1 } else { items.push(item) }
+        localStorage.setItem('cartItems', JSON.stringify({ items, totalNumber: items.reduce((s,i)=>s+(Number(i.priceNumber)||0)*(i.qty||1),0), ts: Date.now() }));
+        updateCartCount(); openCartPanel();
+      }catch(e){ console.error(e); }
+    }
+
+    function updateCartCount(){ try{ const cartData=JSON.parse(localStorage.getItem('cartItems')||'{}'); const totalItems=cartData.items?cartData.items.reduce((s,i)=>s+(i.qty||0),0):0; const cartCount=document.querySelector('.cart-count'); if(cartCount){ cartCount.textContent=totalItems } }catch(e){} }
+    function initializeCartPanel(){ const cartBtn=document.querySelector('.cart'); const cartPanel=document.getElementById('cartPanel'); const cartBackdrop=document.getElementById('cartBackdrop'); const cartClose=document.getElementById('cartClose'); if(cartBtn){ cartBtn.addEventListener('click',function(e){ e.preventDefault(); openCartPanel(); }) } if(cartClose){ cartClose.addEventListener('click',function(){ closeCartPanel(); }) } if(cartBackdrop){ cartBackdrop.addEventListener('click',function(){ closeCartPanel(); }) } document.addEventListener('keydown',function(e){ if(e.key==='Escape'){ closeCartPanel(); } }); }
+    function openCartPanel(){ const cartPanel=document.getElementById('cartPanel'); const cartBackdrop=document.getElementById('cartBackdrop'); if(cartPanel&&cartBackdrop){ cartPanel.classList.add('active'); cartBackdrop.classList.add('active'); cartPanel.setAttribute('aria-hidden','false'); } }
+    function closeCartPanel(){ const cartPanel=document.getElementById('cartPanel'); const cartBackdrop=document.getElementById('cartBackdrop'); if(cartPanel&&cartBackdrop){ cartPanel.classList.remove('active'); cartBackdrop.classList.remove('active'); cartPanel.setAttribute('aria-hidden','true'); } }
+  </script>
+</body> 
+</html>

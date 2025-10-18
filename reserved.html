@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" 
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" 
+      integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" 
+      crossorigin="anonymous" referrerpolicy="no-referrer"/>
+      <!-- <link
+        rel="stylesheet"
+        href="https://cdnjs.cl  oudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"/> -->
+    <link rel="stylesheet" href="shared/style.css"/>
+    <link rel="stylesheet" href="shared/main.css"/>
+    <title>بیلبورد های رزرو شده</title>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+        <!-- Right section -->
+        <div class="nav-right">
+          <!-- <a style="padding: 0;" href="home.html"><img src="../images/icons/Group 57.png" alt="لوگو" class="logo"/></a> -->
+          <a href="billboards-table/billboards-table.html"><b> جدول کل تابلوها </b></a>
+          <div class="dropdown">
+              <button class="dropdown-btn"><b>لیست شهرها</b></button>
+              <div class="dropdown-content">
+                  <a href="city list/tehran.html">تهران</a>
+                  <a href="city list/isfahan.html">اصفهان</a>
+                  <a href="city list/shiraz.html">شیراز</a>
+                  <a href="city list/mashhad.html">مشهد</a>
+                  <a href="city list/tabriz.html">تبریز</a>
+              </div>
+          </div>
+          <a href="reserved.html"><b>بیلبورد های رزرو شده</b></a>
+        </div>
+  
+        <!-- اینجا منوی همبرگری -->
+        <div class="hamburger" id="hamburger">
+          <i style="font-size: 1.6em;" class="fa-solid fa-bars"></i>
+          <!-- <img style="width: 1.5em;" src="../images/icon/menu-bar.png" alt=""> -->
+        </div>
+        <!-- پنل منو موبایل -->
+        <div class="mobile-panel" id="mobilePanel">
+            <!-- سکشن کاربری موبایل -->
+            <div class="mobile-user-section">
+              <div class="mobile-user-profile" id="mobileUserProfile">
+                <div class="mobile-user-avatar">
+                  <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="mobile-user-info">
+                  <span class="mobile-user-name">آرین مقدری</span>
+                  <span class="mobile-user-role">مدیر</span>
+                </div>
+                <div class="mobile-user-dropdown-arrow">
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+            </div>
+              <div class="mobile-user-dropdown" id="mobileUserDropdown">
+                <a href="user-profile/profile.html"><i class="fa-solid fa-user"></i> پروفایل</a>
+                <a href="admin-panel/admin-panel.html"><i class="fa-solid fa-cog"></i> پنل مدیریت</a>
+                <a href="#" onclick="logout()"><i class="fa-solid fa-sign-out-alt"></i> خروج</a>
+              </div>
+            </div>
+            
+            <div class="mobile-links">
+              <a href="billboards-table/billboards-table.html">جدول کل تابلوها</a>
+              <div class="dropdown">
+                <button class="dropdown-btn"><b>لیست شهرها</b></button>
+                <div class="dropdown-content">
+                    <a href="city list/tehran.html">تهران</a>
+                    <a href="city list/isfahan.html">اصفهان</a>
+                    <a href="city list/shiraz.html">شیراز</a>
+                    <a href="city list/mashhad.html">مشهد</a>
+                    <a href="city list/tabriz.html">تبریز</a>
+                </div>
+              </div>
+              <a href="reserved.html">بیلبورد های رزرو شده</a>
+            </div>
+
+        </div>
+        <!-- لوگو در وسط ناوبری موبایل -->
+        <div class="mobile-logo">
+          <i class="fa-solid fa-billboard"></i>
+          <span>بیلبورد</span>
+        </div>
+  
+        <!-- Left section -->
+        <div class="nav-left">
+            <a href="#" class="cart">
+                🛒
+                <span class="cart-count">0</span>
+            </a>
+            <div class="user-profile" id="desktopUserProfile">
+                <div class="user-avatar">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <span class="user-name">آرین مقدری</span>
+                    <span class="user-role">مدیر</span>
+                </div>
+                <div class="user-dropdown-arrow">
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="user-dropdown">
+                    <a href="user-profile/profile.html"><i class="fa-solid fa-user"></i> پروفایل</a>
+                    <a href="admin-panel/admin-panel.html"><i class="fa-solid fa-cog"></i> پنل مدیریت</a>
+                    <a href="#" onclick="logout()"><i class="fa-solid fa-sign-out-alt"></i>خروج</a>
+                </div>
+            </div>
+        </div>
+      </nav>
+  </header>
+
+  <main class="container">
+    <h1 style="text-align: right; margin-top: 150px;">بیلبورد های رزرو شده</h1>
+    <section class="product-sec-new">
+      <div id="reservedGrid" class="row"></div>
+    </section>
+  </main>
+
+  </body>
+</html>
+
+

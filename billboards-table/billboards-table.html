@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>جدول تابلوهای تبلیغاتی</title>
+  <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" 
+    integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer"/>
+  <link rel="stylesheet" href="../shared/main.css"/>
+  <link rel="stylesheet" href="../shared/style.css"/>
+  <link rel="stylesheet" href="table-style.css"/>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header>
+    <nav class="navbar">
+      <!-- Right section -->
+      <div class="nav-right">
+        <!-- <a style="padding: 0;" href="home.html"><img src="../images/icons/Group 57.png" alt="لوگو" class="logo"/></a> -->
+        <a href="../index.html"><b> صفحه اصلی</b></a>
+        <div class="dropdown">
+            <button class="dropdown-btn"><b>لیست شهرها</b></button>
+            <div class="dropdown-content">
+                <a href="#">تهران</a>
+                <a href="#">اصفهان</a>
+                <a href="#">شیراز</a>
+                <a href="#">مشهد</a>
+                <a href="#">تبریز</a>
+            </div>
+        </div>
+        <!-- <a href="../reserved.html"><b>بیلبورد های رزرو شده</b></a> -->
+      </div>
+
+      <!-- اینجا منوی همبرگری -->
+      <div class="hamburger" id="hamburger">
+        <i style="font-size: 1.6em;" class="fa-solid fa-bars"></i>
+        <!-- <img style="width: 1.5em;" src="../images/icon/menu-bar.png" alt=""> -->
+      </div>
+      <!-- پنل منو موبایل -->
+      <div class="mobile-panel" id="mobilePanel">
+          <!-- سکشن کاربری موبایل -->
+          <div class="mobile-user-section">
+            <div class="mobile-user-profile" id="mobileUserProfile">
+              <div class="mobile-user-avatar">
+                <i class="fa-solid fa-user"></i>
+              </div>
+              <div class="mobile-user-info">
+                <span class="mobile-user-name">علی احمدی</span>
+                <span class="mobile-user-role">مدیر</span>
+              </div>
+              <div class="mobile-user-dropdown-arrow">
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+          </div>
+            <div class="mobile-user-dropdown" id="mobileUserDropdown">
+              <a href="user-profile/profile.html"><i class="fa-solid fa-user"></i> پروفایل</a>
+              <a href="admin-panel/admin-panel.html"><i class="fa-solid fa-cog"></i> پنل مدیریت</a>
+              <a href="/frontend/Login Form/loginpanel.html" onclick="logout()"><i class="fa-solid fa-sign-out-alt"></i> خروج</a>
+            </div>
+          </div>
+          
+          <div class="mobile-links">
+            <a href="billboards-table/billboards-table.html">جدول کل تابلوها</a>
+            <div class="dropdown">
+              <button class="dropdown-btn"><b>لیست شهرها</b></button>
+              <div class="dropdown-content">
+                  <a href="#">تهران</a>
+                  <a href="#">اصفهان</a>
+                  <a href="#">شیراز</a>
+                  <a href="#">مشهد</a>
+                  <a href="#">تبریز</a>
+              </div>
+            </div>
+            <!-- <a href="../reserved.html">بیلبورد های رزرو شده</a> -->
+            
+          </div>
+      </div>
+
+
+      <!-- لوگو در وسط ناوبری موبایل -->
+      <div class="mobile-logo">
+        <i class="fa-solid fa-billboard"></i>
+        <span>بیلبورد</span>
+      </div>
+
+
+      <!-- Left section -->
+      <div class="nav-left">
+          <a href="#" class="cart">
+              🛒
+              <span class="cart-count">0</span>
+          </a>
+          <div class="user-profile" id="desktopUserProfile">
+              <div class="user-avatar">
+                  <i class="fa-solid fa-user"></i>
+              </div>
+              <div class="user-info">
+                  <span class="user-name">آرین مقدری</span>
+                  <span class="user-role">مدیر</span>
+              </div>
+              <div class="user-dropdown-arrow">
+                  <i class="fa-solid fa-chevron-down"></i>
+              </div>
+              <div class="user-dropdown">
+                  <a href="../user-profile/profile.html"><i class="fa-solid fa-user"></i> پروفایل</a>
+                  <a href="../admin-panel/admin-panel.html"><i class="fa-solid fa-cog"></i> پنل مدیریت</a>
+                  <a href="/frontend/Login Form/loginpanel.html" onclick="logout()"><i class="fa-solid fa-sign-out-alt"></i> خروج</a>
+              </div>
+          </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      <!-- Page Header -->
+      <div class="page-header">
+        <h1 class="page-title">
+          <i class="fa-solid fa-table"></i>
+          جدول تابلوهای تبلیغاتی
+        </h1>
+        <p class="page-subtitle">مدیریت و مشاهده تمام تابلوهای تبلیغاتی</p>
+      </div>
+
+      <!-- Filters Section -->
+      <div class="filters-section">
+        <div class="filter-group">
+          <label for="provinceFilter">استان:</label>
+          <select id="provinceFilter" class="filter-select">
+            <option value="">همه استان‌ها</option>
+            <option value="تهران">تهران</option>
+            <option value="اصفهان">اصفهان</option>
+            <option value="فارس">فارس</option>
+            <option value="خراسان رضوی">خراسان رضوی</option>
+            <option value="آذربایجان شرقی">آذربایجان شرقی</option>
+          </select>
+        </div>
+        
+        <div class="filter-group">
+          <label for="statusFilter">وضعیت:</label>
+          <select id="statusFilter" class="filter-select">
+            <option value="">همه وضعیت‌ها</option>
+            <option value="empty">تابلوهای خالی</option>
+            <option value="cultural">طرح فرهنگی</option>
+            <option value="broadcasting">اکران شده ها</option>
+            <option value="reserved">رزرو شده‌ها</option>
+            <option value="inactive">غیرفعال</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="ownershipFilter">مالکیت:</label>
+          <select id="ownershipFilter" class="filter-select">
+            <option value="">همه مالکیت‌ها</option>
+            <!-- Ownership options will be populated dynamically -->
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="cityFilter">شهر:</label>
+          <select id="cityFilter" class="filter-select">
+            <option value="">همه شهرها</option>
+            <!-- City options will be populated dynamically from admin panel -->
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="searchInput">جستجو:</label>
+          <input type="text" id="searchInput" class="filter-input" placeholder="جستجو در تابلوها...">
+        </div>
+
+        <button class="filter-btn">
+          <i class="fa-solid fa-filter"></i>
+          اعمال فیلتر
+        </button>
+      </div>
+
+      <!-- Table Section -->
+      <div class="table-container">
+        <div class="table-header">
+          <h3>لیست تابلوهای تبلیغاتی</h3>
+          <div class="table-actions">
+            <button class="action-btn export-pdf-btn">
+              <i class="fa-solid fa-file-pdf"></i>
+              خروجی PDF
+            </button>
+            <button class="action-btn export-btn">
+              <i class="fa-solid fa-download"></i>
+              خروجی Excel
+            </button>
+            <button class="action-btn add-btn">
+              <i class="fa-solid fa-plus"></i>
+              افزودن تابلو
+            </button>
+          </div>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="billboards-table" id="billboardsTable">
+            <thead>
+              <tr>
+                <th>ردیف</th>
+                <th>کد تابلو</th>
+                <th>استان</th>
+                <th>شهر</th>
+                <th>منطقه</th>
+                <th>موقعیت تابلو</th>
+                <th>زاویه دید تابلو</th>
+                <th>نوع سازه تابلو</th>
+                <th>طول</th>
+                <th>عرض</th>
+                <th>مترمربع</th>
+                <th>مالکیت</th>
+                <th>غیرفعال بودن</th>
+                <th>تابلوهای خالی</th>
+                <th>طرح فرهنگی</th>
+                <th>اکران شده ها</th>
+                <th>رزرو شده‌ها</th>
+                <th>تاریخ شروع اکران</th>
+                <th>تاریخ پایان اکران</th>
+                <th>مدت زمان اکران</th>
+                <th>تعداد روز های باقیمانده از رزرو</th>
+                <th>اکران شده توسط</th>
+                <th>تمدید اکران</th>
+                <th>رزرو شده بعدی توسط</th>
+                <th>عملیات</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Table content will be populated here -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+          <button class="pagination-btn" disabled>
+            <i class="fa-solid fa-chevron-right"></i>
+            قبلی
+          </button>
+          <div class="pagination-numbers">
+            <span class="page-number active">1</span>
+            <span class="page-number">2</span>
+            <span class="page-number">3</span>
+            <span class="page-number">4</span>
+            <span class="page-number">5</span>
+          </div>
+          <button class="pagination-btn">
+            بعدی
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Add Billboard Modal -->
+  <div class="modal-overlay" id="addBillboardModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-title-section">
+          <h2>
+            <i class="fa-solid fa-plus"></i>
+            افزودن تابلو جدید
+          </h2>
+          <p class="modal-warning">
+            <i class="fa-solid fa-info-circle"></i>
+            برای بستن این پنجره فقط از دکمه X استفاده کنید. در صورت وارد کردن اطلاعات، پیام تأیید نمایش داده می‌شود.
+          </p>
+        </div>
+        <button class="modal-close" id="closeModal">
+          <i class="fa-solid fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+        <form id="addBillboardForm" class="billboard-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="billboardCode">کد تابلو *</label>
+              <input type="text" id="billboardCode" name="billboardCode" required placeholder="مثال: BB-011">
+            </div>
+            <div class="form-group">
+              <label for="province">استان *</label>
+              <select id="province" name="province" required>
+                <option value="">انتخاب استان</option>
+                <!-- Provinces will be populated dynamically -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="city">شهر *</label>
+              <select id="city" name="city" required>
+                <option value="">انتخاب شهر</option>
+                <!-- Cities will be populated dynamically -->
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="region">منطقه *</label>
+              <input type="text" id="region" name="region" required placeholder="مثال: منطقه 1">
+            </div>
+            <div class="form-group">
+              <label for="position">موقعیت تابلو *</label>
+              <input type="text" id="position" name="position" required placeholder="مثال: میدان ولیعصر، خیابان کریمخان">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="viewAngle">زاویه دید تابلو</label>
+              <input type="text" id="viewAngle" name="viewAngle" placeholder="مثال: 45 درجه">
+            </div>
+            <div class="form-group">
+              <label for="structureType">نوع سازه تابلو</label>
+              <input type="text" id="structureType" name="structureType" placeholder="مثال: سازه پل عابر / پایه‌ای / دیجیتال">
+            </div>
+            <div class="form-group">
+              <label for="length">طول (متر) *</label>
+              <input type="number" id="length" name="length" required placeholder="مثال: 6" step="0.1" min="0">
+            </div>
+          </div>
+
+          <!-- جهت ورود تصویر تابلو به صورت آپلود تصویر تابلو -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="imageFile">تصویر تابلو</label>
+              <input type="file" id="imageFile" name="imageFile" accept="image/*">
+            </div>
+            <div class="form-group">
+              <label for="productPrice">قیمت کارت محصول (اختیاری)</label>
+              <input type="number" id="productPrice" name="productPrice" placeholder="مثال: 1200" step="0.01" min="0">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="width">عرض (متر) *</label>
+              <input type="number" id="width" name="width" required placeholder="مثال: 3" step="0.1" min="0">
+            </div>
+            <div class="form-group">
+              <label for="squareMeter">مترمربع</label>
+              <input type="number" id="squareMeter" name="squareMeter" placeholder="محاسبه خودکار" step="0.1" min="0" readonly>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="ownership">مالکیت (شرکت همکار)</label>
+              <select id="ownership" name="ownership">
+                <option value="">انتخاب شرکت</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="isInactive">غیرفعال بودن</label>
+              <select id="isInactive" name="isInactive">
+                <option value="false">فعال</option>
+                <option value="true">غیرفعال</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="isEmpty">تابلوهای خالی</label>
+              <select id="isEmpty" name="isEmpty">
+                <option value="false">پر</option>
+                <option value="true">خالی</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="isCultural">طرح فرهنگی</label>
+              <select id="isCultural" name="isCultural">
+                <option value="false">خیر</option>
+                <option value="true">بله</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="isBroadcasting">اکران شده ها</label>
+              <select id="isBroadcasting" name="isBroadcasting">
+                <option value="false">خیر</option>
+                <option value="true">بله</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="isReserved">رزرو شده‌ها</label>
+              <select id="isReserved" name="isReserved">
+                <option value="false">خیر</option>
+                <option value="true">بله</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="broadcastStartDate">تاریخ شروع اکران</label>
+              <input type="date" id="broadcastStartDate" name="broadcastStartDate">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="broadcastEndDate">تاریخ پایان اکران</label>
+              <input type="date" id="broadcastEndDate" name="broadcastEndDate">
+            </div>
+            <div class="form-group">
+              <label for="broadcastDuration">مدت زمان اکران (روز)</label>
+              <input type="number" id="broadcastDuration" name="broadcastDuration" placeholder="محاسبه خودکار" min="0" readonly>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="broadcastBy">اکران شده توسط</label>
+              <input type="text" id="broadcastBy" name="broadcastBy" placeholder="نام شرکت یا شخص">
+            </div>
+            <div class="form-group">
+              <label for="extension">تمدید اکران</label>
+              <select id="extension" name="extension">
+                <option value="false">خیر</option>
+                <option value="true">بله</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nextReservedBy">رزرو شده بعدی توسط</label>
+              <input type="text" id="nextReservedBy" name="nextReservedBy" placeholder="نام شرکت یا شخص">
+            </div>
+            <div class="form-group">
+              <label for="nextReservationDate">تاریخ رزرو بعدی</label>
+              <input type="date" id="nextReservationDate" name="nextReservationDate">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group full-width">
+              <label for="description">توضیحات</label>
+              <textarea id="description" name="description" rows="3" placeholder="توضیحات اضافی در مورد تابلو..."></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" id="cancelBtn">
+          <i class="fa-solid fa-eraser"></i>
+          پاک کردن فرم
+        </button>
+        <button type="submit" form="addBillboardForm" class="btn-save">
+          <i class="fa-solid fa-save"></i>
+          ذخیره تابلو
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SheetJS for Excel export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="../shared/javas.js"></script>
+  <script src="table-script.js"></script>
+</body>
+</html>
+

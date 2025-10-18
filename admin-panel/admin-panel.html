@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>پنل مدیریت - سیستم مدیریت تابلوهای تبلیغاتی</title>
+  <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" 
+    integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer"/>
+  <link rel="stylesheet" href="../shared/main.css"/>
+  <link rel="stylesheet" href="../shared/style.css"/>
+  <link rel="stylesheet" href="admin-style.css"/>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header>
+    <nav class="navbar">
+      <!-- Right section -->
+      <div class="nav-right">
+        <!-- <a style="padding: 0;" href="home.html"><img src="../images/icons/Group 57.png" alt="لوگو" class="logo"/></a> -->
+        <a href="../index.html"><b> صفحه اصلی</b></a>
+        <div class="dropdown">
+            <button class="dropdown-btn"><b>لیست شهرها</b></button>
+            <div class="dropdown-content">
+                <a href="#">تهران</a>
+                <a href="#">اصفهان</a>
+                <a href="#">شیراز</a>
+                <a href="#">مشهد</a>
+                <a href="#">تبریز</a>
+            </div>
+        </div>
+        <!-- <a href="../reserved.html"><b>بیلبورد های رزرو شده</b></a> -->
+      </div>
+
+      <!-- اینجا منوی همبرگری -->
+      <div class="hamburger" id="hamburger">
+        <i style="font-size: 1.6em;" class="fa-solid fa-bars"></i>
+        <!-- <img style="width: 1.5em;" src="../images/icon/menu-bar.png" alt=""> -->
+      </div>
+      <!-- پنل منو موبایل -->
+      <div class="mobile-panel" id="mobilePanel">
+          <!-- سکشن کاربری موبایل -->
+          <div class="mobile-user-section">
+            <div class="mobile-user-profile" id="mobileUserProfile">
+              <div class="mobile-user-avatar">
+                <i class="fa-solid fa-user"></i>
+              </div>
+              <div class="mobile-user-info">
+                <span class="mobile-user-name">علی احمدی</span>
+                <span class="mobile-user-role">مدیر</span>
+              </div>
+              <div class="mobile-user-dropdown-arrow">
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+          </div>
+            <div class="mobile-user-dropdown" id="mobileUserDropdown">
+              <a href="../user-profile/profile.html"><i class="fa-solid fa-user"></i> پروفایل</a>
+              <a href="admin-panel.html"><i class="fa-solid fa-cog"></i> پنل مدیریت</a>
+              <a href="/frontend/Login Form/loginpanel.html" onclick="logout()"><i class="fa-solid fa-sign-out-alt"></i> خروج</a>
+            </div>
+          </div>
+          
+          <div class="mobile-links">
+            <a href="billboards-table/billboards-table.html">جدول کل تابلوها</a>
+            <div class="dropdown">
+              <button class="dropdown-btn"><b>لیست شهرها</b></button>
+              <div class="dropdown-content">
+                  <a href="#">تهران</a>
+                  <a href="#">اصفهان</a>
+                  <a href="#">شیراز</a>
+                  <a href="#">مشهد</a>
+                  <a href="#">تبریز</a>
+              </div>
+            </div>
+            <!-- <a href="../reserved.html">بیلبورد های رزرو شده</a> -->
+            
+          </div>
+      </div>
+
+
+      <!-- لوگو در وسط ناوبری موبایل -->
+      <div class="mobile-logo">
+        <i class="fa-solid fa-billboard"></i>
+        <span>بیلبورد</span>
+      </div>
+
+
+      <!-- Left section -->
+      <div class="nav-left">
+          <a href="#" class="cart">
+              🛒
+              <span class="cart-count">0</span>
+          </a>
+          <div class="user-profile" id="desktopUserProfile">
+              <div class="user-avatar">
+                  <i class="fa-solid fa-user"></i>
+              </div>
+              <div class="user-info">
+                  <span class="user-name">آرین مقدری</span>
+                  <span class="user-role">مدیر</span>
+              </div>
+              <div class="user-dropdown-arrow">
+                  <i class="fa-solid fa-chevron-down"></i>
+              </div>
+              <div class="user-dropdown">
+                  <a href="../user-profile/profile.html"><i class="fa-solid fa-user"></i> پروفایل</a>
+                  <a href="../admin-panel/admin-panel.html"><i class="fa-solid fa-cog"></i> پنل مدیریت</a>
+                  <a href="/frontend/Login Form/loginpanel.html" onclick="logout()"><i class="fa-solid fa-sign-out-alt"></i> خروج</a>
+              </div>
+          </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      <!-- Page Header -->
+      <div class="page-header">
+        <h1 class="page-title">
+          <i class="fa-solid fa-cogs"></i>
+          پنل مدیریت
+        </h1>
+        <p class="page-subtitle">مدیریت کاربران، تنظیمات و کنترل دسترسی‌ها</p>
+      </div>
+
+      <!-- Admin Dashboard -->
+      <div class="admin-dashboard">
+        <!-- Stats Cards -->
+        <div class="stats-section">
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fa-solid fa-users"></i>
+            </div>
+            <div class="stat-info">
+              <span class="stat-number" id="activeUsersCount">0</span>
+              <span class="stat-label">کاربران فعال</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fa-solid fa-user-shield"></i>
+            </div>
+            <div class="stat-info">
+              <span class="stat-number" id="adminsCount">0</span>
+              <span class="stat-label">مدیران</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fa-solid fa-table"></i>
+            </div>
+            <div class="stat-info">
+              <span class="stat-number" id="totalBillboardsCount">0</span>
+              <span class="stat-label">تابلوها</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fa-solid fa-chart-line"></i>
+            </div>
+            <div class="stat-info">
+              <span class="stat-number" id="usageRate">0%</span>
+              <span class="stat-label">نرخ استفاده</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Admin Tabs -->
+        <div class="admin-tabs">
+          <div class="tab-buttons">
+            <button class="tab-btn active" data-tab="users">
+              <i class="fa-solid fa-users"></i>
+              مدیریت کاربران
+            </button>
+            <button class="tab-btn" data-tab="partners">
+              <i class="fa-solid fa-handshake"></i>
+              شرکت‌های همکار
+            </button>
+            <button class="tab-btn" data-tab="roles">
+              <i class="fa-solid fa-user-shield"></i>
+              سطوح دسترسی
+            </button>
+            <button class="tab-btn" data-tab="settings">
+              <i class="fa-solid fa-cog"></i>
+              تنظیمات سیستم
+            </button>
+            <button class="tab-btn" data-tab="provinces">
+              <i class="fa-solid fa-map"></i>
+              مدیریت استان‌ها
+            </button>
+            <button class="tab-btn" data-tab="cities">
+              <i class="fa-solid fa-city"></i>
+              مدیریت شهرها
+            </button>
+            <button class="tab-btn" data-tab="logs">
+              <i class="fa-solid fa-list-alt"></i>
+              گزارش فعالیت‌ها
+            </button>
+          </div>
+
+          <!-- Users Management Tab -->
+          <div class="tab-content active" id="users-tab">
+            <div class="tab-header">
+              <h3>
+                <i class="fa-solid fa-users"></i>
+                مدیریت کاربران
+              </h3>
+              <button class="btn-add-user" onclick="addUser()">
+                <i class="fa-solid fa-plus"></i>
+                افزودن کاربر جدید
+              </button>
+            </div>
+
+            <div class="users-table-container">
+              <table class="users-table">
+                <thead>
+                  <tr>
+                    <th>ردیف</th>
+                    <th>نام کاربری</th>
+                    <th>نام کامل</th>
+                    <th>ایمیل</th>
+                    <th>نقش</th>
+                    <th>وضعیت</th>
+                    <th>تاریخ عضویت</th>
+                    <th>آخرین ورود</th>
+                    <th>عملیات</th>
+                  </tr>
+                </thead>
+                <tbody id="usersTableBody">
+                  <!-- Users will be populated here -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Partners Management Tab -->
+          <div class="tab-content" id="partners-tab">
+            <div class="tab-header">
+              <h3>
+                <i class="fa-solid fa-handshake"></i>
+                شرکت‌های همکار
+              </h3>
+            </div>
+
+            <div class="partners-grid">
+              <div class="partner-form-card">
+                <h4>افزودن شرکت همکار</h4>
+                <form id="partnerForm" class="partner-form">
+                  <div class="form-row">
+                    <div class="form-group full-width">
+                      <label for="partnerName">نام شرکت *</label>
+                      <input type="text" id="partnerName" name="partnerName" required placeholder="مثال: شرکت تبلیغاتی آفتاب">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="partnerPhone1">شماره تلفن 1</label>
+                      <input type="tel" id="partnerPhone1" name="partnerPhone1" placeholder="مثال: 02112345678">
+                    </div>
+                    <div class="form-group">
+                      <label for="partnerPhone2">شماره تلفن 2</label>
+                      <input type="tel" id="partnerPhone2" name="partnerPhone2" placeholder="مثال: 09121234567">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="partnerPhone3">شماره تلفن 3</label>
+                      <input type="tel" id="partnerPhone3" name="partnerPhone3" placeholder="اختیاری">
+                    </div>
+                    <div class="form-group">
+                      <label for="partnerPhone4">شماره تلفن 4</label>
+                      <input type="tel" id="partnerPhone4" name="partnerPhone4" placeholder="اختیاری">
+                    </div>
+                  </div>
+                  <div class="partners-actions">
+                    <button type="submit" class="btn-save">
+                      <i class="fa-solid fa-save"></i>
+                      ذخیره شرکت
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+              <div class="partner-list-card">
+                <h4>فهرست شرکت‌های همکار</h4>
+                <div class="partner-list-wrap">
+                  <table class="partner-table">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>نام شرکت</th>
+                        <th>شماره‌ها</th>
+                        <th>عملیات</th>
+                      </tr>
+                    </thead>
+                    <tbody id="partnersTableBody"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Roles Management Tab -->
+          <div class="tab-content" id="roles-tab">
+            <div class="tab-header">
+              <h3>
+                <i class="fa-solid fa-user-shield"></i>
+                مدیریت سطوح دسترسی
+              </h3>
+              <button class="btn-add-role" onclick="addRole()">
+                <i class="fa-solid fa-plus"></i>
+                افزودن نقش جدید
+              </button>
+            </div>
+
+            <div class="roles-grid">
+              <div class="role-card">
+                <div class="role-header">
+                  <h4>مدیر کل</h4>
+                  <span class="role-badge admin">Admin</span>
+                </div>
+                <div class="role-permissions">
+                  <div class="permission-item">
+                    <i class="fa-solid fa-check"></i>
+                    <span>مدیریت کاربران</span>
+                  </div>
+                  <div class="permission-item">
+                    <i class="fa-solid fa-check"></i>
+                    <span>مدیریت تابلوها</span>
+                  </div>
+                  <div class="permission-item">
+                    <i class="fa-solid fa-check"></i>
+                    <span>گزارش‌گیری</span>
+                  </div>
+                  <div class="permission-item">
+                    <i class="fa-solid fa-check"></i>
+                    <span>تنظیمات سیستم</span>
+                  </div>
+                </div>
+                <div class="role-actions">
+                  <button class="btn-edit-role" onclick="editRole('admin')">
+                    <i class="fa-solid fa-edit"></i>
+                    ویرایش
+                  </button>
+                </div>
+              </div>
+
+              <div class="role-card">
+                <div class="role-header">
+                  <h4>مدیر</h4>
+                  <span class="role-badge manager">Manager</span>
+                </div>
+                <div class="role-permissions">
+                  <div class="permission-item">
+                    <i class="fa-solid fa-check"></i>
+                    <span>مدیریت تابلوها</span>
+                  </div>
+                  <div class="permission-item">
+                    <i class="fa-solid fa-check"></i>
+                    <span>گزارش‌گیری</span>
+                  </div>
+                  <div class="permission-item">
+                    <i class="fa-solid fa-times"></i>
+                    <span>مدیریت کاربران</span>
+                  </div>
+                  <div class="permission-item">
+                    <i class="fa-solid fa-times"></i>
+                    <span>تنظیمات سیستم</span>
+                  </div>
+                </div>
+                <div class="role-actions">
+                  <button class="btn-edit-role" onclick="editRole('manager')">
+                    <i class="fa-solid fa-edit"></i>
+                    ویرایش
+                  </button>
+                </div>
+              </div>
+
+              <div class="role-card">
+                <div class="role-header">
+                  <h4>کاربر عادی</h4>
+                  <span class="role-badge user">User</span>
+                </div>
+                <div class="role-permissions">
+                  <div class="permission-item">
+                    <i class="fa-solid fa-check"></i>
+                    <span>مشاهده تابلوها</span>
+                  </div>
+                  <div class="permission-item">
+                    <i class="fa-solid fa-times"></i>
+                    <span>مدیریت تابلوها</span>
+                  </div>
+                  <div class="permission-item">
+                    <i class="fa-solid fa-times"></i>
+                    <span>گزارش‌گیری</span>
+                  </div>
+                  <div class="permission-item">
+                    <i class="fa-solid fa-times"></i>
+                    <span>مدیریت کاربران</span>
+                  </div>
+                </div>
+                <div class="role-actions">
+                  <button class="btn-edit-role" onclick="editRole('user')">
+                    <i class="fa-solid fa-edit"></i>
+                    ویرایش
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Settings Tab -->
+          <div class="tab-content" id="settings-tab">
+            <div class="tab-header">
+              <h3>
+                <i class="fa-solid fa-cog"></i>
+                تنظیمات سیستم
+              </h3>
+            </div>
+
+            <div class="settings-sections">
+              <div class="settings-section">
+                <h4>
+                  <i class="fa-solid fa-shield-alt"></i>
+                  امنیت سیستم
+                </h4>
+                <div class="setting-item">
+                  <label>حداقل طول رمز عبور:</label>
+                  <input type="number" value="8" min="6" max="20">
+                </div>
+                <div class="setting-item">
+                  <label>مدت زمان انقضای جلسه (دقیقه):</label>
+                  <input type="number" value="30" min="5" max="480">
+                </div>
+                <div class="setting-item">
+                  <label>حداکثر تلاش ورود ناموفق:</label>
+                  <input type="number" value="5" min="3" max="10">
+                </div>
+              </div>
+
+              <div class="settings-section">
+                <h4>
+                  <i class="fa-solid fa-bell"></i>
+                  اعلان‌ها
+                </h4>
+                <div class="setting-item">
+                  <label>
+                    <input type="checkbox" checked>
+                    اعلان ایمیل برای ورود جدید
+                  </label>
+                </div>
+                <div class="setting-item">
+                  <label>
+                    <input type="checkbox" checked>
+                    اعلان برای تغییرات مهم
+                  </label>
+                </div>
+                <div class="setting-item">
+                  <label>
+                    <input type="checkbox">
+                    اعلان روزانه گزارش
+                  </label>
+                </div>
+              </div>
+
+              <div class="settings-section">
+                <h4>
+                  <i class="fa-solid fa-database"></i>
+                  پشتیبان‌گیری
+                </h4>
+                <div class="setting-item">
+                  <label>فرکانس پشتیبان‌گیری:</label>
+                  <select>
+                    <option value="daily">روزانه</option>
+                    <option value="weekly" selected>هفتگی</option>
+                    <option value="monthly">ماهانه</option>
+                  </select>
+                </div>
+                <div class="setting-item">
+                  <label>
+                    <input type="checkbox" checked>
+                    پشتیبان‌گیری خودکار
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="settings-actions">
+              <button class="btn-save-settings">
+                <i class="fa-solid fa-save"></i>
+                ذخیره تنظیمات
+              </button>
+            </div>
+          </div>
+
+          <!-- Provinces Management Tab -->
+          <div class="tab-content" id="provinces-tab">
+            <div class="tab-header">
+              <h3>
+                <i class="fa-solid fa-map"></i>
+                مدیریت استان‌ها
+              </h3>
+              <button class="btn-add-province" onclick="addProvince()">
+                <i class="fa-solid fa-plus"></i>
+                افزودن استان جدید
+              </button>
+            </div>
+
+            <div class="provinces-grid">
+              <div class="province-form-card">
+                <h4>افزودن استان جدید</h4>
+                <form id="provinceForm" class="province-form">
+                  <div class="form-row">
+                    <div class="form-group full-width">
+                      <label for="provinceName">نام استان *</label>
+                      <input type="text" id="provinceName" name="provinceName" required placeholder="مثال: تهران">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="provinceCode">کد استان</label>
+                      <input type="text" id="provinceCode" name="provinceCode" placeholder="مثال: THR">
+                    </div>
+                    <div class="form-group">
+                      <label for="provinceStatus">وضعیت</label>
+                      <select id="provinceStatus" name="provinceStatus">
+                        <option value="active">فعال</option>
+                        <option value="inactive">غیرفعال</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group full-width">
+                      <label for="provinceDescription">توضیحات</label>
+                      <textarea id="provinceDescription" name="provinceDescription" rows="3" placeholder="توضیحات اضافی در مورد استان..."></textarea>
+                    </div>
+                  </div>
+                  <div class="provinces-actions">
+                    <button type="submit" class="btn-save">
+                      <i class="fa-solid fa-save"></i>
+                      ذخیره استان
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+              <div class="province-list-card">
+                <h4>فهرست استان‌ها</h4>
+                <div class="province-list-wrap">
+                  <table class="province-table">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>نام استان</th>
+                        <th>کد استان</th>
+                        <th>تعداد شهرها</th>
+                        <th>وضعیت</th>
+                        <th>عملیات</th>
+                      </tr>
+                    </thead>
+                    <tbody id="provincesTableBody"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cities Management Tab -->
+          <div class="tab-content" id="cities-tab">
+            <div class="tab-header">
+              <h3>
+                <i class="fa-solid fa-city"></i>
+                مدیریت شهرها
+              </h3>
+            <button class="btn-add-city" onclick="addCity()">
+              <i class="fa-solid fa-plus"></i>
+              افزودن شهر جدید
+            </button>
+            <button class="btn-add-city" onclick="downloadAllCityPages()" style="background: #38a169; margin-right: 10px;">
+              <i class="fa-solid fa-download"></i>
+              دانلود همه صفحات شهرها
+            </button>
+            </div>
+
+            <div class="cities-grid">
+              <div class="city-form-card">
+                <h4>افزودن شهر جدید</h4>
+                <form id="cityForm" class="city-form">
+                  <div class="form-row">
+                    <div class="form-group full-width">
+                      <label for="cityName">نام شهر *</label>
+                      <input type="text" id="cityName" name="cityName" required placeholder="مثال: تهران">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="cityProvince">استان *</label>
+                      <select id="cityProvince" name="cityProvince" required>
+                        <option value="">انتخاب استان</option>
+                        <!-- Provinces will be populated dynamically -->
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="cityCode">کد شهر</label>
+                      <input type="text" id="cityCode" name="cityCode" placeholder="مثال: THR">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group full-width">
+                      <label for="cityDescription">توضیحات</label>
+                      <textarea id="cityDescription" name="cityDescription" rows="3" placeholder="توضیحات اضافی در مورد شهر..."></textarea>
+                    </div>
+                  </div>
+                  <div class="cities-actions">
+                    <button type="submit" class="btn-save">
+                      <i class="fa-solid fa-save"></i>
+                      ذخیره شهر
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+              <div class="city-list-card">
+                <h4>فهرست شهرها</h4>
+                <div class="city-list-wrap">
+                  <table class="city-table">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>نام شهر</th>
+                        <th>استان</th>
+                        <th>کد شهر</th>
+                        <th>تعداد تابلوها</th>
+                        <th>عملیات</th>
+                      </tr>
+                    </thead>
+                    <tbody id="citiesTableBody"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Logs Tab -->
+          <div class="tab-content" id="logs-tab">
+            <div class="tab-header">
+              <h3>
+                <i class="fa-solid fa-list-alt"></i>
+                گزارش فعالیت‌ها
+              </h3>
+              <div class="log-filters">
+                <select id="logTypeFilter">
+                  <option value="">همه انواع</option>
+                  <option value="login">ورود</option>
+                  <option value="logout">خروج</option>
+                  <option value="create">ایجاد</option>
+                  <option value="update">ویرایش</option>
+                  <option value="delete">حذف</option>
+                </select>
+                <input type="date" id="logDateFilter">
+                <button class="btn-filter-logs">فیلتر</button>
+              </div>
+            </div>
+
+            <div class="logs-container">
+              <div class="log-item">
+                <div class="log-icon">
+                  <i class="fa-solid fa-sign-in-alt"></i>
+                </div>
+                <div class="log-content">
+                  <p class="log-text">کاربر "علی احمدی" وارد سیستم شد</p>
+                  <p class="log-time">امروز - 14:30</p>
+                </div>
+                <div class="log-type">
+                  <span class="log-badge login">ورود</span>
+                </div>
+              </div>
+
+              <div class="log-item">
+                <div class="log-icon">
+                  <i class="fa-solid fa-plus"></i>
+                </div>
+                <div class="log-content">
+                  <p class="log-text">تابلو جدید "BB-025" ایجاد شد</p>
+                  <p class="log-time">امروز - 13:45</p>
+                </div>
+                <div class="log-type">
+                  <span class="log-badge create">ایجاد</span>
+                </div>
+              </div>
+
+              <div class="log-item">
+                <div class="log-icon">
+                  <i class="fa-solid fa-edit"></i>
+                </div>
+                <div class="log-content">
+                  <p class="log-text">تابلو "BB-012" ویرایش شد</p>
+                  <p class="log-time">امروز - 12:20</p>
+                </div>
+                <div class="log-type">
+                  <span class="log-badge update">ویرایش</span>
+                </div>
+              </div>
+
+              <div class="log-item">
+                <div class="log-icon">
+                  <i class="fa-solid fa-user-plus"></i>
+                </div>
+                <div class="log-content">
+                  <p class="log-text">کاربر جدید "مریم رضایی" اضافه شد</p>
+                  <p class="log-time">دیروز - 16:15</p>
+                </div>
+                <div class="log-type">
+                  <span class="log-badge create">ایجاد</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Add User Modal -->
+  <div class="modal-overlay" id="addUserModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-title-section">
+          <h2>
+            <i class="fa-solid fa-user-plus"></i>
+            افزودن کاربر جدید
+          </h2>
+        </div>
+        <button class="modal-close" id="closeAddUserModal">
+          <i class="fa-solid fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+        <form id="addUserForm" class="user-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="newUsername">نام کاربری *</label>
+              <input type="text" id="newUsername" name="username" required placeholder="مثال: user123">
+            </div>
+            <div class="form-group">
+              <label for="newFullName">نام کامل *</label>
+              <input type="text" id="newFullName" name="fullName" required placeholder="مثال: علی احمدی">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="newEmail">ایمیل *</label>
+              <input type="email" id="newEmail" name="email" required placeholder="مثال: user@example.com">
+            </div>
+            <div class="form-group">
+              <label for="newPhone">شماره تلفن</label>
+              <input type="tel" id="newPhone" name="phone" placeholder="مثال: 09123456789">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="newPassword">رمز عبور *</label>
+              <input type="password" id="newPassword" name="password" required placeholder="حداقل 6 کاراکتر">
+            </div>
+            <div class="form-group">
+              <label for="confirmPassword">تأیید رمز عبور *</label>
+              <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="رمز عبور را مجدداً وارد کنید">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="userRole">نقش کاربر *</label>
+              <select id="userRole" name="role" required>
+                <option value="">انتخاب نقش</option>
+                <option value="admin">مدیر کل</option>
+                <option value="manager">مدیر</option>
+                <option value="user">کاربر عادی</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="userStatus">وضعیت</label>
+              <select id="userStatus" name="status">
+                <option value="active">فعال</option>
+                <option value="inactive">غیرفعال</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" id="cancelAddUserBtn">
+          <i class="fa-solid fa-times"></i>
+          انصراف
+        </button>
+        <button type="submit" form="addUserForm" class="btn-save">
+          <i class="fa-solid fa-save"></i>
+          ایجاد کاربر
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Province Modal -->
+  <div class="modal-overlay" id="addProvinceModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-title-section">
+          <h2>
+            <i class="fa-solid fa-map"></i>
+            افزودن استان جدید
+          </h2>
+        </div>
+        <button class="modal-close" id="closeAddProvinceModal">
+          <i class="fa-solid fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+        <form id="addProvinceForm" class="province-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="newProvinceName">نام استان *</label>
+              <input type="text" id="newProvinceName" name="provinceName" required placeholder="مثال: تهران">
+            </div>
+            <div class="form-group">
+              <label for="newProvinceCode">کد استان</label>
+              <input type="text" id="newProvinceCode" name="provinceCode" placeholder="مثال: THR">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="newProvinceStatus">وضعیت</label>
+              <select id="newProvinceStatus" name="status">
+                <option value="active">فعال</option>
+                <option value="inactive">غیرفعال</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="newProvinceDescription">توضیحات</label>
+              <textarea id="newProvinceDescription" name="description" rows="3" placeholder="توضیحات اضافی در مورد استان..."></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" id="cancelAddProvinceBtn">
+          <i class="fa-solid fa-times"></i>
+          انصراف
+        </button>
+        <button type="submit" form="addProvinceForm" class="btn-save">
+          <i class="fa-solid fa-save"></i>
+          ایجاد استان
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Province Modal -->
+  <div class="modal-overlay" id="editProvinceModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-title-section">
+          <h2>
+            <i class="fa-solid fa-edit"></i>
+            ویرایش استان
+          </h2>
+        </div>
+        <button class="modal-close" id="closeEditProvinceModal">
+          <i class="fa-solid fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+        <form id="editProvinceForm" class="province-form">
+          <input type="hidden" id="editProvinceId" name="provinceId">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="editProvinceName">نام استان *</label>
+              <input type="text" id="editProvinceName" name="provinceName" required placeholder="مثال: تهران">
+            </div>
+            <div class="form-group">
+              <label for="editProvinceCode">کد استان</label>
+              <input type="text" id="editProvinceCode" name="provinceCode" placeholder="مثال: THR">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="editProvinceStatus">وضعیت</label>
+              <select id="editProvinceStatus" name="status">
+                <option value="active">فعال</option>
+                <option value="inactive">غیرفعال</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="editProvinceDescription">توضیحات</label>
+              <textarea id="editProvinceDescription" name="description" rows="3" placeholder="توضیحات اضافی در مورد استان..."></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" id="cancelEditProvinceBtn">
+          <i class="fa-solid fa-times"></i>
+          انصراف
+        </button>
+        <button type="submit" form="editProvinceForm" class="btn-save">
+          <i class="fa-solid fa-save"></i>
+          ذخیره تغییرات
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add City Modal -->
+  <div class="modal-overlay" id="addCityModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-title-section">
+          <h2>
+            <i class="fa-solid fa-city"></i>
+            افزودن شهر جدید
+          </h2>
+        </div>
+        <button class="modal-close" id="closeAddCityModal">
+          <i class="fa-solid fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+        <form id="addCityForm" class="city-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="newCityName">نام شهر *</label>
+              <input type="text" id="newCityName" name="cityName" required placeholder="مثال: تهران">
+            </div>
+            <div class="form-group">
+              <label for="newCityProvince">استان *</label>
+              <select id="newCityProvince" name="cityProvince" required>
+                <option value="">انتخاب استان</option>
+                <!-- Provinces will be populated dynamically -->
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="newCityCode">کد شهر</label>
+              <input type="text" id="newCityCode" name="cityCode" placeholder="مثال: THR">
+            </div>
+            <div class="form-group">
+              <label for="newCityStatus">وضعیت</label>
+              <select id="newCityStatus" name="status">
+                <option value="active">فعال</option>
+                <option value="inactive">غیرفعال</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group full-width">
+              <label for="newCityDescription">توضیحات</label>
+              <textarea id="newCityDescription" name="description" rows="3" placeholder="توضیحات اضافی در مورد شهر..."></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" id="cancelAddCityBtn">
+          <i class="fa-solid fa-times"></i>
+          انصراف
+        </button>
+        <button type="submit" form="addCityForm" class="btn-save">
+          <i class="fa-solid fa-save"></i>
+          ایجاد شهر
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit City Modal -->
+  <div class="modal-overlay" id="editCityModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-title-section">
+          <h2>
+            <i class="fa-solid fa-edit"></i>
+            ویرایش شهر
+          </h2>
+        </div>
+        <button class="modal-close" id="closeEditCityModal">
+          <i class="fa-solid fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+        <form id="editCityForm" class="city-form">
+          <input type="hidden" id="editCityId" name="cityId">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="editCityName">نام شهر *</label>
+              <input type="text" id="editCityName" name="cityName" required placeholder="مثال: تهران">
+            </div>
+            <div class="form-group">
+              <label for="editCityProvince">استان *</label>
+              <select id="editCityProvince" name="cityProvince" required>
+                <option value="">انتخاب استان</option>
+                <!-- Provinces will be populated dynamically -->
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="editCityCode">کد شهر</label>
+              <input type="text" id="editCityCode" name="cityCode" placeholder="مثال: THR">
+            </div>
+            <div class="form-group">
+              <label for="editCityStatus">وضعیت</label>
+              <select id="editCityStatus" name="status">
+                <option value="active">فعال</option>
+                <option value="inactive">غیرفعال</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group full-width">
+              <label for="editCityDescription">توضیحات</label>
+              <textarea id="editCityDescription" name="description" rows="3" placeholder="توضیحات اضافی در مورد شهر..."></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" id="cancelEditCityBtn">
+          <i class="fa-solid fa-times"></i>
+          انصراف
+        </button>
+        <button type="submit" form="editCityForm" class="btn-save">
+          <i class="fa-solid fa-save"></i>
+          ذخیره تغییرات
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../shared/javas.js"></script>
+  <script src="../city list/city-page-manager.js"></script>
+  <script src="admin-script.js"></script>
+</body>
+</html>

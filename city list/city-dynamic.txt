@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>بیلبوردهای شهر</title>
+	<link rel="stylesheet" href="../shared/style.css"/>
+	<link rel="stylesheet" href="../shared/main.css"/>
+	<link rel="stylesheet" href="city-style.css"/>
+</head>
+<body>
+	<header class="city-header">
+		<div class="container">
+			<h1 id="cityTitle">بیلبوردهای شهر</h1>
+			<a class="back-link" href="../navbar.html">بازگشت به صفحه اصلی</a>
+		</div>
+	</header>
+	<main class="container city-page">
+		<section class="city-summary">
+			<div class="meta">
+				<span>تعداد بیلبوردها: <strong id="billboardCount">0</strong></span>
+			</div>
+		</section>
+		<section class="cards-grid" id="cardsGrid"></section>
+	</main>
+	<script src="city-script.js"></script>
+	<script>
+		// Dynamic city detection and page loading
+		document.addEventListener('DOMContentLoaded', function() {
+			const urlParams = new URLSearchParams(window.location.search);
+			const cityName = urlParams.get('city');
+			
+			if (cityName) {
+				// Update page title and header
+				document.title = `بیلبوردهای شهر ${cityName}`;
+				document.getElementById('cityTitle').textContent = `بیلبوردهای شهر ${cityName}`;
+				
+				// Set data attribute for city script
+				document.body.setAttribute('data-city', cityName);
+				
+				// Load city page content if available
+				const citySlug = cityName.toLowerCase().replace(/\s+/g, '-');
+				const cityPages = JSON.parse(localStorage.getItem('cityPages') || '{}');
+				
+				if (cityPages[citySlug]) {
+					// Page exists, continue with normal loading
+					console.log('City page found in localStorage');
+				} else {
+					// Create new city page
+					console.log('Creating new city page for:', cityName);
+					// This will be handled by the city script
+				}
+			} else {
+				// No city specified, show error or redirect
+				document.getElementById('cityTitle').textContent = 'شهر مشخص نشده است';
+				document.getElementById('cardsGrid').innerHTML = '<p>لطفاً از طریق منوی شهرها وارد شوید.</p>';
+			}
+		});
+	</script>
+</body>
+</html>

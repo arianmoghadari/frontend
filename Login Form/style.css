@@ -1,0 +1,302 @@
+/* From Uiverse.io by Priyanshu02020 
+https://uiverse.io/Priyanshu02020/fluffy-treefrog-31*/ 
+* {
+    box-sizing: border-box;
+}
+body {
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, rgba(21,33,74,0.05), rgba(190,163,105,0.08));
+}
+
+.container {
+    --form-width: 380px;
+    --aspect-ratio: 1.1;
+    --panel-width: 420px;
+    --login-box-color: rgba(255, 255, 255, 0.9);
+    --input-color: #f3f5fa;
+    --button-color: linear-gradient(135deg, var(--color-navy, #15214a), var(--color-navy-700, #0f1838));
+    --footer-color: rgba(21, 33, 74, 0.65);
+    display: grid;
+    grid-template-columns: var(--panel-width) var(--form-width);
+    gap: 0;
+    align-items: stretch;
+    position: relative;
+    overflow: hidden;
+    background: var(--login-box-color);
+    border-radius: 28px;
+    width: calc(var(--panel-width) + var(--form-width));
+    height: calc(var(--form-width) * var(--aspect-ratio) + 120px);
+    z-index: 8;
+    border: 1px solid rgba(190, 163, 105, 0.25);
+    box-shadow:
+      0 12px 40px rgba(21, 33, 74, 0.18),
+      0 4px 12px rgba(21, 33, 74, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+  
+  .container::before {
+    content: "";
+    position: absolute;
+    inset: -50px;
+    z-index: -2;
+    background: conic-gradient(
+      from 45deg,
+      transparent 75%,
+      #fff,
+      transparent 100%
+    );
+    animation: spin 4s ease-in-out infinite;
+  }
+  
+  @keyframes spin {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .login-box {
+    background: var(--login-box-color);
+    border-radius: 0 28px 28px 0;
+    padding: 36px 36px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(190, 163, 105, 0.25);
+    box-shadow:
+      0 10px 30px rgba(21, 33, 74, 0.15),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+  }
+
+  /* Brand side panel */
+  .brand-panel {
+    background: linear-gradient(135deg, var(--color-navy, #15214a), var(--color-navy-700, #0f1838));
+    color: #fff;
+    padding: 40px 36px;
+    border-radius: 28px 0 0 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 14px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .brand-panel::after {
+    content: "";
+    position: absolute;
+    inset: -20%;
+    background: radial-gradient(circle at 20% 20%, rgba(190,163,105,0.35), transparent 45%),
+                radial-gradient(circle at 80% 80%, rgba(255,255,255,0.08), transparent 40%);
+    filter: blur(20px);
+    pointer-events: none;
+  }
+
+  .brand-badge {
+    width: 64px;
+    height: 64px;
+    border-radius: 18px;
+    display: grid;
+    place-items: center;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.95);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.25);
+  }
+
+  .brand-title { font-size: 28px; font-weight: 800; letter-spacing: -0.5px; }
+  .brand-subtitle { opacity: 0.85; font-size: 14px; }
+  .brand-points { margin: 10px 0 0; padding: 0 18px 0 0; line-height: 2; font-size: 14px; }
+  .brand-points li { position: relative; }
+  .brand-points li::marker { color: rgba(190,163,105,0.95); }
+  
+  .form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 14px;
+  }
+  
+  .logo {
+    width: 65px;
+    height: 65px;
+    background: linear-gradient(135deg, var(--color-navy, #15214a), var(--color-navy-700, #0f1838));
+    box-shadow:
+      0 8px 16px rgba(21, 33, 74, 0.2);
+    border-radius: 20px;
+    border: 2px solid rgba(190, 163, 105, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  
+  .logo::before {
+    content: "";
+    position: absolute;
+    bottom: 10px;
+    width: 50%;
+    height: 20%;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border: 2.5px solid #fff;
+  }
+  
+  .logo::after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    width: 30%;
+    height: 30%;
+    border-radius: 50%;
+    border: 2.5px solid #fff;
+  }
+  
+  .user {
+    position: absolute;
+    height: 50px;
+    color: #fff;
+  }
+  
+  .header {
+    width: 100%;
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+    padding: 8px 0 14px;
+    color: var(--color-navy, #15214a);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(190, 163, 105, 0.35);
+    border-radius: 12px;
+    background: var(--input-color);
+    color: #1a202c;
+    outline: none;
+    font-size: 14px;
+  }
+  
+  .input:focus {
+    border: 1px solid rgba(190, 163, 105, 0.9);
+    box-shadow: 0 0 0 4px rgba(190, 163, 105, 0.15);
+    background: #fff;
+  }
+  
+  .button {
+    width: 100%;
+    height: 44px;
+    border: 1px solid rgba(190, 163, 105, 0.45);
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: grid;
+    place-content: center;
+    gap: 10px;
+    background: var(--button-color);
+    color: #ffffff;
+    transition: 0.3s;
+    box-shadow:
+      0 8px 20px rgba(21, 33, 74, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+
+  .divider {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: rgba(21,33,74,0.5);
+    font-size: 12px;
+  }
+
+  .divider::before,
+  .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(21,33,74,0.15), rgba(190,163,105,0.35), rgba(21,33,74,0.15));
+  }
+  .sign-in {
+    margin-top: 5px;
+  }
+  
+  .google-sign-in {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .button:hover {
+    filter: brightness(1.05);
+    transform: translateY(-1px);
+    box-shadow: 0 12px 28px rgba(21, 33, 74, 0.25);
+  }
+  
+  .icon {
+    height: 16px;
+  }
+  
+  .footer {
+    width: 100%;
+    text-align: right;
+    color: var(--footer-color);
+    font-size: 12px;
+  }
+  
+  .footer .link {
+    position: relative;
+    color: var(--footer-color);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .footer .link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    border-radius: 6px;
+    height: 1px;
+    background: currentColor;
+    transition: width 0.3s ease;
+  }
+  
+  .footer .link:hover {
+    color: var(--color-navy, #15214a);
+  }
+  
+  .footer .link:hover::after {
+    width: 100%;
+  }
+
+  
+
+  /* Responsive */
+  @media (max-width: 860px) {
+    .container {
+      grid-template-columns: 1fr;
+      width: min(92vw, 520px);
+      height: auto;
+    }
+    .brand-panel { display: none; }
+    .login-box { border-radius: 24px; height: auto; }
+  }
+  

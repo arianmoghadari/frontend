@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بیلبورد - ورود</title>
+    <link rel="stylesheet" 
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" 
+          integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" 
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="../shared/style.css">
+    <link rel="stylesheet" href="../shared/main.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="brand-panel">
+            <div class="brand-badge">
+                <i class="fa-solid fa-billboard"></i>
+            </div>
+            <h1 class="brand-title">بیلبورد</h1>
+            <p class="brand-subtitle">سیستم مدیریت تابلوهای تبلیغاتی</p>
+            <ul class="brand-points">
+                <li>نمایش و رزرو هوشمند تابلوها</li>
+                <li>مدیریت کاربران و سطوح دسترسی</li>
+                <li>طراحی مدرن با Glassmorphism</li>
+            </ul>
+        </div>
+        <div class="login-box">
+            <form class="form" action="#" method="post"></form>
+            <!-- Arad holding login form (احراز هویت آرین) -->
+            <form class="form" id="loginForm" action="#" method="post">
+                <!-- Arad holding login form (احراز هویت آرین) -->
+                <div class="logo" aria-hidden="true"></div>
+                <span class="header">خوش آمدید</span>
+                <input type="email" name="email" placeholder="ایمیل" class="input" required />
+                <input type="password" name="password" placeholder="رمز عبور" class="input" required />
+                <button type="submit" class="button sign-in">ورود به حساب</button>
+                <div class="divider"><span>یا</span></div>
+                <button type="button" class="button google-sign-in" aria-label="ورود با گوگل">
+                    <svg class="icon" viewBox="-3 0 262 262" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" fill="#000000">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <path d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027" fill="#4285F4"></path>
+                            <path d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055-34.523 0-63.824-22.773-74.269-54.25l-1.531.13-40.298 31.187-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1" fill="#34A853"></path>
+                            <path d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82 0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602l42.356-32.782" fill="#FBBC05"></path>
+                            <path d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251" fill="#EB4335"></path>
+                        </g>
+                    </svg>
+                    <span class="span two">ورود با گوگل</span>
+                </button>
+                <p class="footer">
+                    حساب کاربری ندارید؟
+                    <a href="#" class="link">درخواست ثبت نام بدید.</a>
+                    <br />
+                    <a href="#" class="link">فراموشی رمز عبور</a>
+                </p>
+            </form>
+        </div>
+    </div>
+    <!-- Arad holding login form (احراز هویت آرین) -->
+    <!-- <script>
+    (function(){
+      // Prevent going back to protected pages after login redirect
+      window.addEventListener('pageshow', function(event) {
+        if (event.persisted) {
+          window.location.reload();
+        }
+      });
+      // Minimal demo auth handler; in real app validate on server
+      const form = document.getElementById('loginForm');
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        try { localStorage.setItem('auth', 'true'); } catch {}
+        // redirect to main page; adjust if needed
+        window.location.replace('../navbar.html');
+      });
+      // If already authenticated, skip login
+      try {
+        if (localStorage.getItem('auth') === 'true') {
+          window.location.replace('../navbar.html');
+        }
+      } catch {}
+      // Hardening: clear cache history entries
+      history.pushState(null, document.title, window.location.href);
+      window.addEventListener('popstate', function () {
+        history.pushState(null, document.title, window.location.href);
+      });
+    })();
+  </script> -->
+  <!-- Arad holding login form (احراز هویت آرین) -->
+</body>
+</html>

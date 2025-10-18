@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>سبد خرید</title>
+  <link rel="stylesheet" href="../shared/style.css"/>
+  <link rel="stylesheet" href="../shared/main.css"/>
+  <link rel="stylesheet" href="cart-style.css"/>
+</head>
+<body>
+  <header class="cart-header-page">
+    <div class="container">
+      <h1>سبد خرید</h1>
+      <a class="back-link" href="../navbar.html">بازگشت به صفحه اصلی</a>
+    </div>
+  </header>
+
+  <main class="cart-page container">
+    <section class="cart-page-content">
+      <div class="cart-page-grid">
+        <div class="cart-items">
+          <h2>اقلام انتخاب شده</h2>
+          <table class="cart-table">
+            <thead>
+              <tr>
+                <th>تصویر</th>
+                <th>عنوان</th>
+                <th>قیمت واحد</th>
+                <th>تخفیف (%)</th>
+                <th>تعداد</th>
+                <th>تاریخ شروع</th>
+                <th>تاریخ پایان</th>
+                <th>مجموع</th>
+                <th>حذف</th>
+              </tr>
+            </thead>
+            <tbody id="cartTableBody"></tbody>
+          </table>
+          <div class="cart-summary-line">
+            <span>مجموع سبد:</span>
+            <strong id="cartTotal">0</strong>
+          </div>
+        </div>
+
+        <aside class="cart-actions">
+          <h3>عملیات سفارش</h3>
+          <div class="order-form">
+            <div class="form-row">
+              <label>نوع مشتری:</label>
+              <label><input type="radio" name="personType" value="natural" checked> حقیقی</label>
+              <label><input type="radio" name="personType" value="legal"> حقوقی</label>
+            </div>
+            <div class="form-row" id="genderRow">
+              <label for="genderTitle">عنوان:</label>
+              <select id="genderTitle">
+                <option value="mr">آقا</option>
+                <option value="ms">خانم</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label for="invoiceName">به نام:</label>
+              <input id="invoiceName" type="text" placeholder="نام روی پیش‌فاکتور/فاکتور">
+            </div>
+            
+            <div class="form-row">
+              <label><input id="includeBanner" type="checkbox"> خدمات چاپ بنر اضافه شود</label>
+            </div>
+            <div class="form-row" id="bannerPriceRow" style="display:none">
+              <label for="bannerPrice">قیمت چاپ بنر:</label>
+              <input id="bannerPrice" type="number" min="0" step="0.01" placeholder="0">
+            </div>
+            <div class="form-row">
+              <label>شماره سند:</label>
+              <input id="docNumber" type="text" placeholder="—">
+            </div>
+          </div>
+          <div class="actions">
+            <button id="btnProforma" class="btn btn-outline">چاپ پیش‌فاکتور</button>
+            <button id="btnInvoice" class="btn btn-primary">فاکتور نهایی</button>
+          </div>
+          <p class="hint"><a href="../proformas.html">مشاهده همه پیش‌فاکتورها</a></p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <script src="cart-script.js"></script>
+</body>
+</html>
+
+

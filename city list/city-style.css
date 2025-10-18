@@ -1,0 +1,334 @@
+.city-header {
+	background: linear-gradient(135deg, #2b6cb0, #2c5282);
+	color: #fff;
+	padding: 16px 0;
+}
+.city-header .container { display:flex; justify-content: space-between; align-items:center; }
+.city-header .back-link { color:#e2e8f0; text-decoration:none; }
+
+.filter-section{
+	margin-top: 1000px;
+}
+
+
+.city-page { padding: 16px; }
+/* Make city pages full-width like navbar content */
+/* (reverted) */
+.meta { color:#4a5568; margin: 8px 0 16px; }
+
+/* City Summary Styles */
+.city-summary {
+  min-height: 120px;
+  background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+  margin: 20px auto;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  max-width: 800px;
+  width: 90%;
+}
+
+.city-summary .meta {
+  text-align: center;
+  margin: 0;
+  padding: 30px 20px;
+}
+
+.city-summary h2 {
+  color: #2d3748;
+  margin-bottom: 10px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.city-summary span {
+  font-size: 18px;
+  color: #4a5568;
+  display: block;
+}
+
+.city-summary strong {
+  color: #e53e3e;
+  font-size: 20px;
+}
+
+.cards-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+	gap: 12px;
+}
+.card {
+	background: #fff;
+	border: 1px solid #edf2f7;
+	border-radius: 10px;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+}
+.card img { width: 100%; height: 160px; object-fit: cover; }
+.card .card-body { padding: 12px; display:grid; gap:8px; }
+.card .title { font-weight: 700; color:#2d3748; }
+.card .subtitle { color:#718096; font-size: 13px; }
+.card .price { font-weight: 800; color:#1a202c; }
+.card .actions { display:flex; gap:8px; }
+.btn { padding: 8px 10px; border:1px solid #e2e8f0; border-radius: 8px; background:#fff; cursor:pointer; }
+.btn-primary { background:#3182ce; color:#fff; border-color:#3182ce; }
+
+.no-billboards {
+	grid-column: 1 / -1;
+	text-align: center;
+	padding: 40px 20px;
+	color: #718096;
+}
+
+.no-billboards p {
+	font-size: 16px;
+	margin: 0;
+}
+
+.no-image {
+	width: 100%;
+	height: 160px;
+	background: #f7fafc;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #a0aec0;
+	font-size: 14px;
+}
+
+.card:hover {
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	transform: translateY(-2px);
+	transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+	background: #2c5282;
+	border-color: #2c5282;
+}
+
+/* Product Card Styles are inherited from shared/main.css to match navbar exactly */
+
+/* Popup Styles */
+.popup {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.7);
+	z-index: 1000;
+	backdrop-filter: blur(5px);
+}
+
+.popup-content {
+	background: white;
+	width: 90%;
+	max-width: 600px;
+	margin: 5% auto;
+	padding: 30px;
+	border-radius: 15px;
+	text-align: center;
+	position: relative;
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+	animation: popupSlideIn 0.3s ease;
+}
+
+@keyframes popupSlideIn {
+	from {
+		opacity: 0;
+		transform: translateY(-50px) scale(0.9);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}
+
+.close-btn {
+	position: absolute;
+	top: 15px;
+	right: 20px;
+	font-size: 30px;
+	font-weight: bold;
+	color: #aaa;
+	cursor: pointer;
+	transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+	color: #e53e3e;
+}
+
+/* Cart Panel Styles */
+.cart-backdrop {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 999;
+}
+
+.cart-panel {
+	position: fixed;
+	top: 0;
+	right: -400px;
+	width: 400px;
+	height: 100%;
+	background: white;
+	box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+	transition: right 0.3s ease;
+	z-index: 1000;
+	display: flex;
+	flex-direction: column;
+}
+
+.cart-panel.open {
+	right: 0;
+}
+
+.cart-header {
+	padding: 20px;
+	border-bottom: 1px solid #edf2f7;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background: #f7fafc;
+}
+
+.cart-header span {
+	font-size: 18px;
+	font-weight: bold;
+	color: #2d3748;
+}
+
+.cart-close {
+	background: none;
+	border: none;
+	font-size: 24px;
+	cursor: pointer;
+	color: #718096;
+	transition: color 0.3s ease;
+}
+
+.cart-close:hover {
+	color: #e53e3e;
+}
+
+.cart-body {
+	flex: 1;
+	overflow-y: auto;
+	padding: 20px;
+}
+
+.cart-table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.cart-table th,
+.cart-table td {
+	padding: 12px 8px;
+	text-align: right;
+	border-bottom: 1px solid #edf2f7;
+}
+
+.cart-table th {
+	background: #f7fafc;
+	font-weight: bold;
+	color: #4a5568;
+	font-size: 14px;
+}
+
+.cart-table img {
+	width: 50px;
+	height: 50px;
+	object-fit: cover;
+	border-radius: 6px;
+}
+
+.cart-footer {
+	padding: 20px;
+	border-top: 1px solid #edf2f7;
+	background: #f7fafc;
+}
+
+.cart-total {
+	margin-bottom: 15px;
+	text-align: center;
+	font-size: 18px;
+	font-weight: bold;
+	color: #2d3748;
+}
+
+.btn-checkout {
+	width: 100%;
+	padding: 12px;
+	background: #38a169;
+	color: white;
+	border: none;
+	border-radius: 8px;
+	font-size: 16px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background 0.3s ease;
+}
+
+.btn-checkout:hover {
+	background: #2f855a;
+}
+
+/* No Products Message */
+.no-products {
+	grid-column: 1 / -1;
+	text-align: center;
+	padding: 60px 20px;
+	color: #718096;
+}
+
+.no-products h3 {
+	margin: 20px 0 10px;
+	color: #4a5568;
+}
+
+.no-products p {
+	margin: 0;
+	line-height: 1.6;
+}
+
+@media (max-width: 600px){
+	.card img { height: 140px; }
+	.no-image { height: 140px; }
+	.cards-grid {
+		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+		gap: 8px;
+	}
+	.img-sec { height: 160px; }
+	.title { min-height: 44px; }
+	
+	.popup-content {
+		width: 95%;
+		margin: 10% auto;
+		padding: 20px;
+	}
+	
+	.cart-panel {
+		width: 100%;
+		right: -100%;
+	}
+	
+	/* make columns equal height on mobile too if using grid of cols */
+}
+
+/* Ensure equal height columns when using Bootstrap-like rows */
+.product-sec-new .row > [class*="col-"] { display: flex; }
+.product-sec-new .row > [class*="col-"] > .shoping-card { flex: 1 1 auto; }
+
+/* Match navbar content width: use full-width container for product section on city pages */
+/* (reverted) */
+
+

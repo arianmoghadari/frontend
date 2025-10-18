@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" 
+    integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <!-- <link
+      rel="stylesheet"
+      href="https://cdnjs.cl  oudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"/> -->
+  <link rel="stylesheet" href="shared/style.css"/>
+  <link rel="stylesheet" href="shared/main.css"/>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar">
+      <!-- Right section -->
+      <div class="nav-right">
+        <!-- <a style="padding: 0;" href="home.html"><img src="../images/icons/Group 57.png" alt="لوگو" class="logo"/></a> -->
+        <a href="billboards-table/billboards-table.html"><b> جدول کل تابلوها </b></a>
+        <div class="dropdown">
+            <button class="dropdown-btn"><b>لیست شهرها</b></button>
+            <div class="dropdown-content" id="desktopCityDropdown">
+                <!-- Cities will be populated dynamically -->
+            </div>
+        </div>
+        <!-- <a href="reserved.html"><b>بیلبورد های رزرو شده</b></a> -->
+      </div>
+
+      <!-- اینجا منوی همبرگری -->
+      <div class="hamburger" id="hamburger">
+        <i style="font-size: 1.6em;" class="fa-solid fa-bars"></i>
+        <!-- <img style="width: 1.5em;" src="../images/icon/menu-bar.png" alt=""> -->
+      </div>
+      <!-- پنل منو موبایل -->
+      <div class="mobile-panel" id="mobilePanel">
+          <!-- سکشن کاربری موبایل -->
+          <div class="mobile-user-section">
+            <div class="mobile-user-profile" id="mobileUserProfile">
+              <div class="mobile-user-avatar">
+                <i class="fa-solid fa-user"></i>
+              </div>
+              <div class="mobile-user-info">
+                <span class="mobile-user-name">آرین مقدری</span>
+                <span class="mobile-user-role">مدیر</span>
+              </div>
+              <div class="mobile-user-dropdown-arrow">
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+          </div>
+            <div class="mobile-user-dropdown" id="mobileUserDropdown">
+              <a href="user-profile/profile.html"><i class="fa-solid fa-user"></i> پروفایل</a>
+              <a href="admin-panel/admin-panel.html"><i class="fa-solid fa-cog"></i> پنل مدیریت</a>
+              <a href="#" onclick="logout()"><i class="fa-solid fa-sign-out-alt"></i> خروج</a>
+            </div>
+          </div>
+          
+          <div class="mobile-links">
+            <a href="billboards-table/billboards-table.html">جدول کل تابلوها</a>
+            <div class="dropdown">
+              <button class="dropdown-btn"><b>لیست شهرها</b></button>
+              <div class="dropdown-content" id="mobileCityDropdown">
+                  <!-- Cities will be populated dynamically -->
+              </div>
+            </div>
+            <!-- <a href="reserved.html">بیلبورد های رزرو شده</a> -->
+          </div>
+      </div>
+
+      <!-- لوگو در وسط ناوبری موبایل -->
+      <div class="mobile-logo">
+        <i class="fa-solid fa-billboard"></i>
+        <span>بیلبورد</span>
+      </div>
+
+      <!-- Left section -->
+      <div class="nav-left">
+          <a href="#" class="cart">
+              🛒
+              <span class="cart-count">0</span>
+          </a>
+          <div class="user-profile" id="desktopUserProfile">
+              <div class="user-avatar">
+                  <i class="fa-solid fa-user"></i>
+              </div>
+              <div class="user-info">
+                  <span class="user-name">آرین مقدری</span>
+                  <span class="user-role">مدیر</span>
+              </div>
+              <div class="user-dropdown-arrow">
+                  <i class="fa-solid fa-chevron-down"></i>
+              </div>
+              <div class="user-dropdown">
+                  <a href="user-profile/profile.html"><i class="fa-solid fa-user"></i> پروفایل</a>
+                  <a href="admin-panel/admin-panel.html"><i class="fa-solid fa-cog"></i> پنل مدیریت</a>
+                  <a href="#" onclick="logout()"><i class="fa-solid fa-sign-out-alt"></i> خروج</a>
+              </div>
+          </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <!-- Hero Slider -->
+    <section class="slider">
+        <div class="slides">
+            <div class="item active" id="slide1">
+                <img src="images/slider/s1.jpg" alt="" />
+            </div>
+            <div class="item" id="slide2">
+                <img src="images/slider/s2.jpg" alt="" />
+            </div>
+            <div class="item" id="slide3">
+                <img src="images/slider/s3.jpg" alt="" />
+            </div>
+        </div>
+        <div class="nav-btn prev" onclick="prevSlide()">></div>
+        <div class="nav-btn next" onclick="nextSlide()"><</div>
+    </section>
+    <!-- Filter Section -->
+    <section class="filter-section">
+      <div class="container">
+        <div class="filter-container">
+          <!-- Search Box -->
+          <div class="filter-group search-group">
+            <label for="searchInput">جستجو در محصولات:</label>
+            <div class="search-box">
+              <input type="text" id="searchInput" placeholder="جستجو بر اساس نام، شهر، منطقه...">
+              <i class="fa-solid fa-search"></i>
+            </div>
+          </div>
+          
+          <!-- Label Filter Dropdown -->
+          <div class="filter-group dropdown-group">
+            <label for="labelDropdown">فیلتر بر اساس لیبل:</label>
+            <div class="custom-dropdown">
+              <button class="dropdown-toggle" id="labelDropdownToggle">
+                <span class="dropdown-text">انتخاب لیبل</span>
+                <i class="fa-solid fa-chevron-down"></i>
+              </button>
+              <div class="dropdown-menu" id="labelDropdownMenu">
+                <label class="dropdown-item">
+                  <input type="checkbox" id="filterReserved" value="reserved">
+                  <span class="checkmark"></span>
+                  رزرو شده
+                </label>
+                <label class="dropdown-item">
+                  <input type="checkbox" id="filterAvailable" value="available">
+                  <span class="checkmark"></span>
+                  موجود
+                </label>
+                <label class="dropdown-item">
+                  <input type="checkbox" id="filterInactive" value="inactive">
+                  <span class="checkmark"></span>
+                  غیرفعال
+                </label>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Ownership Filter Dropdown -->
+          <div class="filter-group dropdown-group">
+            <label for="ownershipDropdown">فیلتر بر اساس مالکیت:</label>
+            <div class="custom-dropdown">
+              <button class="dropdown-toggle" id="ownershipDropdownToggle">
+                <span class="dropdown-text">انتخاب مالکیت</span>
+                <i class="fa-solid fa-chevron-down"></i>
+              </button>
+              <div class="dropdown-menu" id="ownershipDropdownMenu">
+                <!-- Ownership options will be populated dynamically -->
+              </div>
+            </div>
+          </div>
+          
+          <!-- Filter Actions -->
+          <div class="filter-actions">
+            <button class="btn-filter" onclick="applyFilters()">
+              <i class="fa-solid fa-filter"></i>
+              اعمال فیلتر
+            </button>
+            <button class="btn-clear" onclick="clearFilters()">
+              <i class="fa-solid fa-times"></i>
+              پاک کردن فیلترها
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products Grid -->
+    <section class="product-sec-new">
+      <div class="row" id="productsContainer">
+        <!-- Product cards will be dynamically loaded here -->
+      </div>
+    </section>
+    
+    <!-- Product Popup -->
+    <div id="product-popup" class="popup">
+      <div class="popup-content">
+        <span class="close-btn">&times;</span>
+        <div id="popup-info"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Cart Panel -->
+  <div class="cart-backdrop" id="cartBackdrop"></div>
+  <aside class="cart-panel" id="cartPanel" aria-hidden="true">
+    <div class="cart-header">
+      <span>سبد خرید</span>
+      <button class="cart-close" id="cartClose" aria-label="بستن">×</button>
+    </div>
+    <div class="cart-body">
+      <table class="cart-table">
+        <thead>
+          <tr>
+            <th>تصویر</th>
+            <th>عنوان</th>
+            <th>قیمت واحد</th>
+            <th>تخفیف (%)</th>
+            <th>تعداد</th>
+            <th>مجموع</th>
+            <th>حذف</th>
+          </tr>
+        </thead>
+        <tbody id="cartTableBody"></tbody>
+      </table>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">مجموع: <span id="cartTotal">0</span></div>
+      <button class="cart-checkout-btn" id="cartCheckout">ثبت سفارش</button>
+    </div>
+  </aside>
+
+  <footer>
+    <div class="row">
+      <div style="order: 0" id="footer-logo">
+        <img style="width: 50px;" src="images/icons/logo.png" alt="">
+        <span style="margin-top: 30px; font-size: 1em;"><p>توضیحات:<br>
+        <pre>بزرگترین و معتبرترین شرکت رزرو بیلبورد تبلیغاتی در ایران
+سایت دیتابیس تابلوهای تبلیغاتی هلدینگ آراد</pre></span>
+      </div>
+      <div style="order: 1" class="col-lg-4">
+        <div class="left">
+          <div id="social-media" class="title">ما را در شبکه های اجتماعی دنبال کنید</div>
+          <div class="socials">
+            <a href=""><i class="fab fa-twitter"></i></a>
+            <a href=""><i class="fab fa-instagram"></i></a>
+            <a href=""><i class="fab fa-linkedin"></i></a>
+            <a href=""><i class="fab fa-telegram-plane"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom">کلیه حقوق برای شرکت آراد محفوظ می باشد 2025/1404 ©</div>
+  </footer>
+  <script src="shared/javas.js"></script>
+</body> 
+</html>

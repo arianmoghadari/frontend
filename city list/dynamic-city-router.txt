@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>مسیریاب صفحات شهرها</title>
+	<style>
+		body { font-family: Tahoma, sans-serif; direction: rtl; text-align: right; padding: 20px; background-color: #f4f7f6; }
+		.container { max-width: 800px; margin: 50px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+		h1 { color: #2c5282; text-align: center; margin-bottom: 30px; font-size: 28px; }
+		.btn { padding: 12px 25px; border: none; border-radius: 8px; background-color: #3182ce; color: white; font-size: 16px; cursor: pointer; margin: 10px; text-decoration: none; display: inline-block; }
+		.btn:hover { background-color: #2c5282; }
+		.btn.success { background-color: #38a169; }
+		.btn.warning { background-color: #d69e2e; }
+		.btn.danger { background-color: #e53e3e; }
+		.status { background: #f7fafc; border: 1px solid #e2e8f0; border-radius: 5px; padding: 15px; margin: 20px 0; }
+		.city-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin: 20px 0; }
+		.city-item { background: #f7fafc; border: 1px solid #e2e8f0; border-radius: 5px; padding: 15px; text-align: center; }
+		.city-name { font-weight: bold; margin-bottom: 5px; }
+		.city-status { font-size: 12px; color: #718096; }
+		.instructions { background: #e6fffa; border: 1px solid #81e6d9; border-radius: 5px; padding: 15px; margin: 20px 0; }
+		.instructions h3 { color: #234e52; margin-top: 0; }
+		.instructions ol { color: #234e52; }
+		.instructions li { margin-bottom: 10px; }
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>مسیریاب صفحات شهرها</h1>
+		
+		<div class="instructions">
+			<h3>راهنمای استفاده:</h3>
+			<ol>
+				<li>ابتدا دکمه "بارگذاری شهرها" را کلیک کنید</li>
+				<li>سپس دکمه "ایجاد همه صفحات" را کلیک کنید</li>
+				<li>فایل‌های HTML دانلود شده را در پوشه <code>city list</code> قرار دهید</li>
+				<li>حالا می‌توانید از navbar به صفحات شهرها بروید</li>
+			</ol>
+		</div>
+		
+		<div class="status">
+			<h3>وضعیت سیستم</h3>
+			<p>تعداد شهرها: <strong id="cityCount">0</strong></p>
+			<p>تعداد صفحات ایجاد شده: <strong id="pageCount">0</strong></p>
+			<p>وضعیت: <strong id="status">آماده</strong></p>
+		</div>
+		
+		<div style="text-align: center;">
+			<button class="btn" onclick="loadCities()">بارگذاری شهرها</button>
+			<button class="btn success" onclick="createAllPages()">ایجاد همه صفحات</button>
+			<button class="btn warning" onclick="downloadAllPages()">دانلود همه صفحات</button>
+			<button class="btn" onclick="testCityPages()">تست صفحات شهرها</button>
+		</div>
+		
+		<div id="citiesList" class="city-list"></div>
+		
+		<div id="log" style="background: #1a202c; color: #e2e8f0; padding: 15px; border-radius: 5px; font-family: monospace; font-size: 12px; max-height: 200px; overflow-y: auto; margin-top: 20px;"></div>
+	</div>
+	
+	<script>
+		let cities = [];
+		let createdPages = 0;
+		
+		function log(message) {
+			const logDiv = document.getElementById('log');
+			const time = new Date().toLocaleTimeString();
+			logDiv.innerHTML += `[${time}] ${message}<br>`;
+			logDiv.scrollTop = logDiv.scrollHeight;
+			console.log(message);
+		}
+		
+		function loadCities() {
+			try {
+				cities = JSON.parse(localStorage.getItem('cities') || '[]');
+				const activeCities = cities.filter(c => c.status === 'active');
+				
+				document.getElementById('cityCount').textContent = activeCities.length;
+				document.getElementById('status').textContent = 'شهرها بارگذاری شدند';
+				
+				displayCities(activeCities);
+				log(`${activeCities.length} شهر بارگذاری شد`);
+			} catch (error) {
+				log('خطا در بارگذاری شهرها: ' + error.message);
+			}
+		}
+		
+		function displayCities(cities) {
+			const container = document.getElementById('citiesList');
+			container.innerHTML = '';
+			
+			cities.forEach(city => {
+				const div = document.createElement('div');
+				div.className = 'city-item';
+				div.innerHTML = `
+					<div class="city-name">${city.name}</div>
+					<div class="city-status">${city.province}</div>
+					<button class="btn" onclick="createPage('${city.name}')" style="padding: 5px 10px; font-size: 12px; margin: 5px 0;">ایجاد صفحه</button>
+					<a href="${city.name.toLowerCase().replace(/\s+/g, '-')}.html" class="btn success" style="padding: 5px 10px; font-size: 12px; margin: 5px 0;">مشاهده صفحه</a>
+				`;
+				container.appendChild(div);
+			});
+		}
+		
+		function createPage(cityName) {
+			const citySlug = cityName.toLowerCase().replace(/\s+/g, '-');
+			const cityPageContent = `<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>بیلبوردهای شهر ${cityName}</title>
+	<link rel="stylesheet" href="../shared/style.css"/>
+	<link rel="stylesheet" href="../shared/main.css"/>
+	<link rel="stylesheet" href="city-style.css"/>
+</head>
+<body data-city="${cityName}">
+	<header class="city-header">
+		<div class="container">
+			<h1 id="cityTitle">بیلبوردهای شهر ${cityName}</h1>
+			<a class="back-link" href="../navbar.html">بازگشت به صفحه اصلی</a>
+		</div>
+	</header>
+	<main class="container city-page">
+		<section class="city-summary">
+			<div class="meta">
+				<span>تعداد بیلبوردها: <strong id="billboardCount">0</strong></span>
+			</div>
+		</section>
+		<section class="cards-grid" id="cardsGrid"></section>
+	</main>
+	<script src="city-script.js"></script>
+</body>
+</html>`;
+			
+			// Create and download file
+			const blob = new Blob([cityPageContent], { type: 'text/html;charset=utf-8' });
+			const url = URL.createObjectURL(blob);
+			
+			const link = document.createElement('a');
+			link.href = url;
+			link.download = `${citySlug}.html`;
+			link.style.display = 'none';
+			
+			document.body.appendChild(link);
+			link.click();
+			document.body.removeChild(link);
+			
+			URL.revokeObjectURL(url);
+			
+			log(`صفحه ${cityName} ایجاد شد`);
+		}
+		
+		function createAllPages() {
+			const activeCities = cities.filter(c => c.status === 'active');
+			if (activeCities.length === 0) {
+				alert('ابتدا شهرها را بارگذاری کنید');
+				return;
+			}
+			
+			createdPages = 0;
+			
+			activeCities.forEach((city, index) => {
+				setTimeout(() => {
+					createPage(city.name);
+					createdPages++;
+					
+					document.getElementById('pageCount').textContent = createdPages;
+					
+					if (createdPages === activeCities.length) {
+						document.getElementById('status').textContent = 'همه صفحات ایجاد شدند';
+						log('همه صفحات با موفقیت ایجاد شدند');
+						alert('همه صفحات ایجاد شدند! لطفاً فایل‌ها را در پوشه city list قرار دهید.');
+					}
+				}, index * 1000);
+			});
+		}
+		
+		function downloadAllPages() {
+			createAllPages();
+		}
+		
+		function testCityPages() {
+			const activeCities = cities.filter(c => c.status === 'active');
+			if (activeCities.length === 0) {
+				alert('ابتدا شهرها را بارگذاری کنید');
+				return;
+			}
+			
+			let testResults = [];
+			activeCities.forEach(city => {
+				const citySlug = city.name.toLowerCase().replace(/\s+/g, '-');
+				const testUrl = `${citySlug}.html`;
+				testResults.push(`<a href="${testUrl}" target="_blank">${city.name}</a>`);
+			});
+			
+			const testDiv = document.createElement('div');
+			testDiv.innerHTML = `
+				<h3>تست صفحات شهرها:</h3>
+				<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin: 20px 0;">
+					${testResults.map(link => `<div>${link}</div>`).join('')}
+				</div>
+			`;
+			
+			document.querySelector('.container').appendChild(testDiv);
+		}
+		
+		// Auto-load cities on page load
+		document.addEventListener('DOMContentLoaded', loadCities);
+	</script>
+</body>
+</html>
